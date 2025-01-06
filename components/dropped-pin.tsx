@@ -1,3 +1,5 @@
+'use client'
+
 import { AdvancedMarker, InfoWindow, Pin } from '@vis.gl/react-google-maps'
 import React, { useState } from 'react'
 
@@ -21,9 +23,10 @@ export const DroppedPin = ({ color }: { color: string }) => {
           onCloseClick={() => setOpen(false)}
         >
           <p>I need Jullan!</p>
-          
         </InfoWindow>
       )}
     </div>
   )
+
+ 
 }
