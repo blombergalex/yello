@@ -1,3 +1,3 @@
 export default function Home() {
-  return <p>Yello</p>
+  return <p className="text-yellow-500">Yello</p>
 }
