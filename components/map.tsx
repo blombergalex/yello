@@ -1,49 +1,24 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps'
 
-interface MapProps {
-  center: google.maps.LatLngLiteral
-  zoom: number
+import React from 'react'
+
+const projectId = process.env.GOOGLE_MAPS_PROJECT_ID
+const position = {
+  lat: 60.286041259765625,
+  lng: 17.425235748291016,
 }
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!
 
-
-const Map: React.FC<MapProps> = ({ center, zoom }) => {
-  const mapRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    // Load the Google Maps API dynamically
-    const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=maps,marker&v=beta`
-    script.async = true
-    script.onload = () => {
-      if (mapRef.current) {
-        const map = new window.google.maps.Map(mapRef.current, {
-          center,
-          zoom,
-        })
-
-        new window.google.maps.marker.AdvancedMarkerElement({
-          position: center,
-          map,
-          title: 'Skydive Stockholm',
-        })
-      }
-    }
-
-    document.head.appendChild(script)
-
-    return () => {
-      if (script) {
-        document.head.removeChild(script)
-      }
-    }
-  }, [center, zoom])
-
+const map = () => {
   return (
-    
+    <APIProvider apiKey={API_KEY}>
+      <div className="h-lvh w-full">
+        <Map defaultCenter={position} zoom={14} mapId={projectId}></Map>
+      </div>
+    </APIProvider>
   )
-  // <div ref={mapRef} style={{ height: '100%', width: '100%' }} />
 }
 
-export default Map
+export default map
