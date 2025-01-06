@@ -1,22 +1,24 @@
 'use client'
 
-import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps'
+import { APIProvider, Map } from '@vis.gl/react-google-maps'
 
 import React from 'react'
+import { DroppedPin } from './dropped-pin'
 
-const projectId = process.env.GOOGLE_MAPS_PROJECT_ID
 const position = {
   lat: 60.286041259765625,
   lng: 17.425235748291016,
 }
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!
+
 
 const map = () => {
   return (
-    <APIProvider apiKey={API_KEY}>
-      <div className="h-lvh w-full">
-        <Map defaultCenter={position} zoom={14} mapId={projectId}></Map>
+    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
+      <div className="size-full flex overflow-hidden">
+        <Map defaultCenter={position} defaultZoom={14} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
+        </Map>
       </div>
+      <DroppedPin color='yellow' />
     </APIProvider>
   )
 }

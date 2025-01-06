@@ -2,13 +2,13 @@ import Map from '@/components/map'
 
 export default function Home() {
   return (
-    <div>
-      <p className="text-yellow-500">Yello</p>
-      <Map />
-    </div>
+    <>
+      <div>
+        <h1 className="text-yellow-500 text-lg">Yello</h1>
+      </div>
+      <div className="border-4 rounded-lg border-yellow-500 m-2 h-1/3 md:h-1/2">
+        <Map />
+      </div>
+    </>
   )
 }
-
-/* <gmp-map center="60.286041259765625,17.425235748291016" zoom="14" map-id="DEMO_MAP_ID">
-      <gmp-advanced-marker position="60.286041259765625,17.425235748291016" title="My location"></gmp-advanced-marker>
-    </gmp-map> */
