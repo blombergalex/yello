@@ -17,15 +17,43 @@ const YelloMap = () => {
       setShowDirections(true)
     }
   
+  console.log("show directions: ", showDirections)
+
   const Directions = () => {
     const map = useMap()
     const routesLibrary = useMapsLibrary("routes")
     const [directionsService, setDirectionsService] = useState<google.maps.DirectionsService>()
     const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer>()
     const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([])
+    const [userCoords, setUserCoords] = useState<string | null>(null)
 
+    console.log("directions renderer: ", directionsRenderer)
     //getUserLocation => setUserLocation, set origin as userLocation and destination as pin.coordinates
-    // console.log("Go here clicked")
+    useEffect(() => {
+      const getLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position: GeolocationPosition) => {
+              const pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+
+              // const userPosCoords = pos.
+              const userCoords = `${pos.lat}, ${pos.lng}`
+              console.log("userCoords: ", userCoords)
+              setUserCoords(userCoords)
+            },
+          )
+        } else {
+          console.log("Geolocation is not supported by browser")
+        }
+      }
+
+      getLocation()
+    }, []) // to make the getLocation only run once
+
+    console.log("user cords log: ", userCoords)
 
     useEffect(() => {
       if (!routesLibrary || !map) return
@@ -38,7 +66,7 @@ const YelloMap = () => {
       if (!directionsService || !directionsRenderer) return
 
       directionsService.route({
-        origin: "Herrhagsvägen 137, 12260 Enskede", //set origin as userLocation
+        origin: `${userCoords}`, //userCoords: 59.26461048953531, 18.081359169080272
         destination: "60.286041259765625, 17.425235748291016", // either coordinates or adress works, get users positon as either but preferably current position coordinates
         travelMode: google.maps.TravelMode.DRIVING,
         provideRouteAlternatives: false,
@@ -46,7 +74,7 @@ const YelloMap = () => {
         directionsRenderer.setDirections(response)
         setRoutes(response.routes)
       })
-    }, [directionsService, directionsRenderer])
+    }, [directionsService, directionsRenderer, userCoords])
     
     return null
   }
