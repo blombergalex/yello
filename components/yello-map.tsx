@@ -17,8 +17,6 @@ const YelloMap = () => {
       setShowDirections(true)
     }
   
-  console.log("show directions: ", showDirections)
-
   const Directions = () => {
     const map = useMap()
     const routesLibrary = useMapsLibrary("routes")
@@ -27,8 +25,6 @@ const YelloMap = () => {
     const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([])
     const [userCoords, setUserCoords] = useState<string | null>(null)
 
-    console.log("directions renderer: ", directionsRenderer)
-    //getUserLocation => setUserLocation, set origin as userLocation and destination as pin.coordinates
     useEffect(() => {
       const getLocation = () => {
         if (navigator.geolocation) {
@@ -39,19 +35,17 @@ const YelloMap = () => {
                 lng: position.coords.longitude,
               };
 
-              // const userPosCoords = pos.
               const userCoords = `${pos.lat},${pos.lng}`
-              console.log("userCoords: ", userCoords)
               setUserCoords(userCoords)
             },
           )
         } else {
-          console.log("Geolocation is not supported by browser")
+          console.error("Geolocation is not supported by browser")
         }
       }
 
       getLocation()
-    }, []) // to make the getLocation only run once
+    }, []) // getLocation runs once
 
     useEffect(() => {
       if (!routesLibrary || !map) return
@@ -64,7 +58,7 @@ const YelloMap = () => {
       if (!directionsService || !directionsRenderer || !userCoords) return
 
       directionsService.route({
-        origin: `${userCoords}`, //userCoords: 59.26461048953531, 18.081359169080272
+        origin: `${userCoords}`, 
         destination: "60.286041259765625, 17.425235748291016", // either coordinates or adress works, get users positon as either but preferably current position coordinates
         travelMode: google.maps.TravelMode.DRIVING,
         provideRouteAlternatives: false,

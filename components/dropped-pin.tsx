@@ -11,41 +11,11 @@ export const DroppedPin = ({ color, getDirections }: { color: string, getDirecti
 
   const [open, setOpen] = useState(false)
 
-// use geolocation to get location when directions needed 
-  // const getUserLocation = () => {
-  //     const [locationError, setLocationError] = useState<boolean>(false)
-  
-  //     function handleLocationError(browserHasGeolocation: boolean) {
-  //         browserHasGeolocation
-  //           ? "Error: The Geolocation service failed."
-  //           : "Error: Your browser doesn't support geolocation."
-  //       ;
-  //     }
-      
-  
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition(
-  //         (position: GeolocationPosition) => {
-  //           const pos = {
-  //             lat: position.coords.latitude,
-  //             lng: position.coords.longitude,
-  //           };
-  //         },
-  //         () => {
-  //           handleLocationError(true)
-  //         }
-  //       )
-  //     } else {
-  //       handleLocationError(false)
-  //     }
-  //   }
-
   return (
     <div>
       <AdvancedMarker position={skydiverPosition} onClick={() => setOpen(true)}>
         <Pin background={color} glyphColor={color} borderColor={'black'} />
       </AdvancedMarker>
-
       {open && (
         <InfoWindow
           position={skydiverPosition}
