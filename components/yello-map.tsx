@@ -10,25 +10,22 @@ const position = {
   lng: 17.425235748291016,
 }
 
-
 const YelloMap = () => {
-  return (
-    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
-      <div className="size-full flex overflow-hidden">
-        <Map defaultCenter={position} defaultZoom={14} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
-          <Directions />
-        </Map>
-      </div>
-      <DroppedPin color='yellow' />
-    </APIProvider>
-  )
-
-  function Directions() {
+    const [showDirections, setShowDirections] = useState<boolean>(false)
+  
+    const handleShowDirections = () => {
+      setShowDirections(true)
+    }
+  
+  const Directions = () => {
     const map = useMap()
     const routesLibrary = useMapsLibrary("routes")
     const [directionsService, setDirectionsService] = useState<google.maps.DirectionsService>()
     const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer>()
     const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([])
+
+    //getUserLocation => setUserLocation, set origin as userLocation and destination as pin.coordinates
+    // console.log("Go here clicked")
 
     useEffect(() => {
       if (!routesLibrary || !map) return
@@ -41,8 +38,8 @@ const YelloMap = () => {
       if (!directionsService || !directionsRenderer) return
 
       directionsService.route({
-        origin: "Herrhagsvägen 137, 12260 Enskede",
-        destination: "Strandliden 57, hässelby",
+        origin: "Herrhagsvägen 137, 12260 Enskede", //set origin as userLocation
+        destination: "60.286041259765625, 17.425235748291016", // either coordinates or adress works, get users positon as either but preferably current position coordinates
         travelMode: google.maps.TravelMode.DRIVING,
         provideRouteAlternatives: false,
       }).then(response => {
@@ -53,6 +50,17 @@ const YelloMap = () => {
     
     return null
   }
+
+  return (
+    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
+      <div className="size-full flex overflow-hidden">
+        <Map defaultCenter={position} defaultZoom={14} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
+          {showDirections && <Directions/>}
+        </Map>
+      </div>
+      <DroppedPin color='yellow' getDirections={handleShowDirections} />
+    </APIProvider>
+  )
 }
 
 export default YelloMap
