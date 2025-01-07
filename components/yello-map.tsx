@@ -40,7 +40,7 @@ const YelloMap = () => {
               };
 
               // const userPosCoords = pos.
-              const userCoords = `${pos.lat}, ${pos.lng}`
+              const userCoords = `${pos.lat},${pos.lng}`
               console.log("userCoords: ", userCoords)
               setUserCoords(userCoords)
             },
@@ -53,8 +53,6 @@ const YelloMap = () => {
       getLocation()
     }, []) // to make the getLocation only run once
 
-    console.log("user cords log: ", userCoords)
-
     useEffect(() => {
       if (!routesLibrary || !map) return
       setDirectionsService(new routesLibrary.DirectionsService())
@@ -63,7 +61,7 @@ const YelloMap = () => {
     }, [routesLibrary, map])
 
     useEffect(() => {
-      if (!directionsService || !directionsRenderer) return
+      if (!directionsService || !directionsRenderer || !userCoords) return
 
       directionsService.route({
         origin: `${userCoords}`, //userCoords: 59.26461048953531, 18.081359169080272
