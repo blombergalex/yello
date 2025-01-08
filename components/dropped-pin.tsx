@@ -2,7 +2,7 @@
 
 import { AdvancedMarker, InfoWindow, Pin } from '@vis.gl/react-google-maps'
 import React, { useState } from 'react'
-import {Button} from "@nextui-org/button";
+import { Button } from '@nextui-org/button'
 
 export const DroppedPin = ({
   color,
@@ -29,6 +29,22 @@ export const DroppedPin = ({
     }
   }
 
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(positionString)
+      .then(() => {
+        alert('Copied to clipboard!')
+      })
+      .catch((err) => {
+        console.error('Failed to copy text: ', err)
+      })
+  }
+
+  const openInGoogleMaps = () => {
+    const url = `https://www.google.com/maps?q=${positionString}`
+    window.open(url, '_blank')
+  }
+
   return (
     <div>
       <AdvancedMarker position={skydiverPosition} onClick={() => setOpen(true)}>
@@ -38,24 +54,38 @@ export const DroppedPin = ({
         <InfoWindow
           position={skydiverPosition}
           onCloseClick={() => setOpen(false)}
-          className="flex flex-col items-start w-full space-y-1 text-lg"
+          className="flex flex-col items-start w-full space-y-1 text-medium"
         >
           <h2 className="font-bold">Jane Doe</h2>
           <p>*info about jumper...*</p>
-          <Button onPress={() => getDirections()} size="sm" radius="sm">Go here</Button>
+          <Button size="sm" radius="sm" className="items-center" onPress={() => openInGoogleMaps()}>
+            {/* <a
+              href={`https://www.google.com/maps?q=${positionString}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="size-full bg-red-500"
+            > */}
+              Open in google maps
+            {/* </a> */}
+          </Button>
+          <Button onPress={() => getDirections()} size="sm" radius="sm">
+            Show directions
+          </Button>
           {showCoords ? (
-            <div>
-              <Button onClick={() => toggleCoordinates()} size="sm" radius="sm">Hide coordinates</Button>
-              <div className="flex text-wrap">
-                <h3 className='text-sm'>{positionString}</h3>
-                <button>
+            <div className="space-y-1">
+              <Button onPress={() => toggleCoordinates()} size="sm" radius="sm">
+                Hide coordinates
+              </Button>
+              <div className="flex text-wrap items-center">
+                <h3 className="text-xs">{positionString}</h3>
+                <button className="p-2" onClick={() => handleCopy()}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-6"
+                    className="size-5"
                   >
                     <path
                       strokeLinecap="round"
@@ -66,9 +96,11 @@ export const DroppedPin = ({
                 </button>
               </div>
             </div>
-        ) : 
-        <Button onClick={() => toggleCoordinates()} size="sm" radius="sm">Show coordinates</Button>
-        }
+          ) : (
+            <Button onPress={() => toggleCoordinates()} size="sm" radius="sm">
+              Show coordinates
+            </Button>
+          )}
         </InfoWindow>
       )}
     </div>
