@@ -25,6 +25,8 @@ const YelloMap = () => {
     const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([])
     const [userCoords, setUserCoords] = useState<string | null>(null)
 
+    console.log(routes)
+
     useEffect(() => {
       const getLocation = () => {
         if (navigator.geolocation) {
@@ -75,7 +77,7 @@ const YelloMap = () => {
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
       <div className="size-full flex overflow-hidden">
         <Map defaultCenter={position} defaultZoom={12} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
-          {showDirections && <Directions/>}
+          {showDirections && <Directions />}
         </Map>
       </div>
       <DroppedPin color='yellow' getDirections={handleShowDirections} />
