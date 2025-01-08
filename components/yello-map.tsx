@@ -74,7 +74,7 @@ const YelloMap = () => {
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
       <div className="size-full flex overflow-hidden">
-        <Map defaultCenter={position} defaultZoom={14} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
+        <Map defaultCenter={position} defaultZoom={12} mapId={process.env.NEXT_PUBLIC_MAP_ID}>
           {showDirections && <Directions/>}
         </Map>
       </div>
