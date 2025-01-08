@@ -54,16 +54,16 @@ export const DroppedPin = ({
         <InfoWindow
           position={skydiverPosition}
           onCloseClick={() => setOpen(false)}
-          className="flex flex-col items-start w-full space-y-1 text-medium"
+          className="flex flex-col items-start w-full space-y-1 text-medium p-1"
         >
           <h2 className="font-bold">Jane Doe</h2>
           <p>*info about jumper...*</p>
-          <Button onPress={() => getDirections()} size="sm" radius="sm">
+          <Button onPress={() => getDirections()} size="sm" radius="sm" className='bg-yellow-400'>
             Show route
           </Button>
           {showCoords ? (
             <div className="space-y-1">
-              <Button onPress={() => toggleCoordinates()} size="sm" radius="sm">
+              <Button onPress={() => toggleCoordinates()} size="sm" radius="sm" className='bg-yellow-500'>
                 Hide coordinates
               </Button>
               <div className="flex text-wrap items-center">
@@ -87,7 +87,7 @@ export const DroppedPin = ({
               </div>
             </div>
           ) : (
-            <Button onPress={() => toggleCoordinates()} size="sm" radius="sm">
+            <Button onPress={() => toggleCoordinates()} size="sm" radius="sm" className='bg-yellow-500'>
               Show coordinates
             </Button>
           )}
