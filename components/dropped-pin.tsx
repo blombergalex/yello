@@ -58,18 +58,8 @@ export const DroppedPin = ({
         >
           <h2 className="font-bold">Jane Doe</h2>
           <p>*info about jumper...*</p>
-          <Button size="sm" radius="sm" className="items-center" onPress={() => openInGoogleMaps()}>
-            {/* <a
-              href={`https://www.google.com/maps?q=${positionString}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="size-full bg-red-500"
-            > */}
-              Open in google maps
-            {/* </a> */}
-          </Button>
           <Button onPress={() => getDirections()} size="sm" radius="sm">
-            Show directions
+            Show route
           </Button>
           {showCoords ? (
             <div className="space-y-1">
@@ -101,6 +91,14 @@ export const DroppedPin = ({
               Show coordinates
             </Button>
           )}
+          <Button
+            size="sm"
+            radius="sm"
+            className="items-center"
+            onPress={() => openInGoogleMaps()}
+          >
+            Open in Google Maps
+          </Button>
         </InfoWindow>
       )}
     </div>
