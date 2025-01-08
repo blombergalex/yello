@@ -21,12 +21,13 @@ export const DroppedPin = ({
 
   const positionString = `${skydiverPosition.lat}, ${skydiverPosition.lng}`
 
+  const handleClose = () => {
+    setOpen(false)
+    getDirections()
+  }
+
   const toggleCoordinates = () => {
-    if (showCoords) {
-      setShowCoords(false)
-    } else {
-      setShowCoords(true)
-    }
+    setShowCoords(!showCoords)
   }
 
   const handleCopy = () => {
@@ -53,11 +54,11 @@ export const DroppedPin = ({
       {open && (
         <InfoWindow
           position={skydiverPosition}
-          onCloseClick={() => setOpen(false)}
-          className="flex flex-col items-start w-full space-y-1 text-medium p-1"
+          onCloseClick={() => handleClose()}
+          className="flex flex-col items-start w-full space-y-2 p-1"
         >
           <h2 className="font-bold">Jane Doe</h2>
-          <p>*info about jumper...*</p>
+          <p>Info about jumper...</p>
           <Button onPress={() => getDirections()} size="sm" radius="sm" className='bg-yellow-400'>
             Show route
           </Button>
