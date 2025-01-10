@@ -14,8 +14,7 @@ const YelloMap = () => {
   const [showDirections, setShowDirections] = useState<boolean>(false)
 
   const toggleShowDirections = () => {
-    console.log("showDirections state before click: ", showDirections)
-    setShowDirections(!showDirections) //if true it sets to false and vice versa
+    setShowDirections(!showDirections)
   }
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const YelloMap = () => {
       }
 
       getLocation()
-    }, []) // getLocation runs once
+    }, [])
 
     useEffect(() => {
       if (!routesLibrary || !map) return
