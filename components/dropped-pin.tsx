@@ -23,7 +23,6 @@ export const DroppedPin = ({
 
   const handleClose = () => {
     setOpen(false)
-    getDirections()
   }
 
   const toggleCoordinates = () => {
