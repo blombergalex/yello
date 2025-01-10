@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  APIProvider,
-  Map,
-  useMap,
-  useMapsLibrary,
-} from '@vis.gl/react-google-maps'
+import { Map, useMap, useMapsLibrary } from '@vis.gl/react-google-maps'
 
 import React, { useEffect, useState } from 'react'
 import { DroppedPin } from './dropped-pin'
@@ -83,18 +78,14 @@ const YelloMap = () => {
   }
 
   return (
-    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
+    <>
       <div className="size-full flex overflow-hidden">
-        <Map
-          defaultCenter={position}
-          defaultZoom={12}
-          mapId={process.env.NEXT_PUBLIC_MAP_ID}
-        >
-          {showDirections && <Directions/>}
+        <Map defaultCenter={position} defaultZoom={12} mapId={process.env.NEXT_PUBLIC_YELLO_MAP_ID}>
+          {showDirections && <Directions />}
         </Map>
       </div>
-      <DroppedPin color="yellow" getDirections={toggleShowDirections} />
-    </APIProvider>
+      <DroppedPin color='yellow' getDirections={handleShowDirections} />
+    </>
   )
 }
 
