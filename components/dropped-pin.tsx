@@ -16,8 +16,9 @@ export const DroppedPin = ({
     lng: 17.445754543434,
   }
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<boolean>(false)
   const [showCoords, setShowCoords] = useState<boolean>(false)
+  const [routeBtn, setRouteBtn] = useState<boolean>(true)
 
   const positionString = `${skydiverPosition.lat}, ${skydiverPosition.lng}`
 
@@ -27,6 +28,16 @@ export const DroppedPin = ({
 
   const toggleCoordinates = () => {
     setShowCoords(!showCoords)
+  }
+
+  const controlRouteBtn = () => {
+    if (routeBtn) {
+      getDirections()
+      setRouteBtn(false)
+    } else {
+      getDirections()
+      setRouteBtn(true)
+    }
   }
 
   const handleCopy = () => {
@@ -58,9 +69,15 @@ export const DroppedPin = ({
         >
           <h2 className="font-bold">Jane Doe</h2>
           <p>Info about jumper...</p>
-          <Button onPress={() => getDirections()} size="sm" radius="sm" className='bg-yellow-400'>
-            Show route
-          </Button>
+          {routeBtn ? (
+            <Button onPress={() => controlRouteBtn()} size="sm" radius="sm" className='bg-yellow-400'>
+              Show route
+            </Button>
+          ) : (
+            <Button onPress={() => controlRouteBtn()} size="sm" radius="sm" className='bg-yellow-400'>
+              Hide route
+            </Button>
+          )}
           {showCoords ? (
             <div className="space-y-1">
               <Button onPress={() => toggleCoordinates()} size="sm" radius="sm" className='bg-yellow-500'>

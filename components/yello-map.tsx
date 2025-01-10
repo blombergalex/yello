@@ -17,11 +17,6 @@ const YelloMap = () => {
     setShowDirections(!showDirections)
   }
 
-  useEffect(() => {
-    console.log('show directions on change: ', showDirections)
-  }, [showDirections])
-
-
   const Directions = () => {
     const map = useMap()
     const routesLibrary = useMapsLibrary('routes')
@@ -33,7 +28,6 @@ const YelloMap = () => {
     const [userCoords, setUserCoords] = useState<string | null>(null)
 
     console.log(routes)
-    console.log("directionsRenderer ", directionsRenderer)
 
     useEffect(() => {
       const getLocation = () => {
