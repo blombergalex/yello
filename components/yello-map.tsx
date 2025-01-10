@@ -14,9 +14,14 @@ const YelloMap = () => {
   const [showDirections, setShowDirections] = useState<boolean>(false)
 
   const toggleShowDirections = () => {
-    console.log(showDirections)
-    setShowDirections(!showDirections)
+    console.log("showDirections state before click: ", showDirections)
+    setShowDirections(!showDirections) //if true it sets to false and vice versa
   }
+
+  useEffect(() => {
+    console.log('show directions on change: ', showDirections)
+  }, [showDirections])
+
 
   const Directions = () => {
     const map = useMap()
@@ -29,6 +34,7 @@ const YelloMap = () => {
     const [userCoords, setUserCoords] = useState<string | null>(null)
 
     console.log(routes)
+    console.log("directionsRenderer ", directionsRenderer)
 
     useEffect(() => {
       const getLocation = () => {
@@ -54,8 +60,16 @@ const YelloMap = () => {
 
     useEffect(() => {
       if (!routesLibrary || !map) return
+      
+      const renderer = new routesLibrary.DirectionsRenderer({ map })
       setDirectionsService(new routesLibrary.DirectionsService())
-      setDirectionsRenderer(new routesLibrary.DirectionsRenderer({ map }))
+      setDirectionsRenderer(renderer)
+
+      return () => {
+        if (renderer) {
+          renderer.setMap(null)
+        }
+      }
     }, [routesLibrary, map])
 
     useEffect(() => {
@@ -64,7 +78,7 @@ const YelloMap = () => {
       directionsService
         .route({
           origin: `${userCoords}`,
-          destination: '60.286041259765625, 17.425235748291016', // either coordinates or adress works, get users positon as either but preferably current position coordinates
+          destination: '60.286041259765625, 17.425235748291016',
           travelMode: google.maps.TravelMode.DRIVING,
           provideRouteAlternatives: false,
         })
@@ -84,7 +98,7 @@ const YelloMap = () => {
           {showDirections && <Directions />}
         </Map>
       </div>
-      <DroppedPin color='yellow' getDirections={handleShowDirections} />
+      <DroppedPin color='yellow' getDirections={toggleShowDirections} />
     </>
   )
 }
