@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "types": "npx supabase gen types --project-id gdstiojheqrhmivpjzad > utils/supabase/database.types.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -14,7 +15,7 @@
     "@nextui-org/react": "^2.6.11",
     "@nextui-org/system": "^2.4.6",
     "@nextui-org/theme": "^2.4.5",
-    "@supabase/ssr": "^0.5.1",
+    "@supabase/ssr": "^0.5.2",
     "@tanstack/react-query": "^5.56.2",
     "@types/google.maps": "^3.58.1",
     "@vis.gl/react-google-maps": "^1.4.2",
@@ -42,7 +43,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "server-only": "^0.0.1",
-    "supabase": "^1.200.3",
+    "supabase": "^1.226.4",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

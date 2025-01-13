@@ -4,6 +4,7 @@ import { Map, useMap, useMapsLibrary } from '@vis.gl/react-google-maps'
 
 import React, { useEffect, useState } from 'react'
 import { DroppedPin } from './dropped-pin'
+import { getPins } from '@/utils/supabase/queries'
 
 const position = {
   lat: 60.286041259765625,
@@ -53,7 +54,7 @@ const YelloMap = () => {
 
     useEffect(() => {
       if (!routesLibrary || !map) return
-      
+
       const renderer = new routesLibrary.DirectionsRenderer({ map })
       setDirectionsService(new routesLibrary.DirectionsService())
       setDirectionsRenderer(renderer)
@@ -84,14 +85,33 @@ const YelloMap = () => {
     return null
   }
 
+
+  useEffect(() => {
+    const fetchPins = async () => {
+      const { data, error } = await getPins()
+      if (error) {
+        console.error(error)
+      } else {
+        console.log({ data })
+      }
+    }
+
+    fetchPins()
+  })
+
+
   return (
     <>
       <div className="size-full flex overflow-hidden">
-        <Map defaultCenter={position} defaultZoom={12} mapId={process.env.NEXT_PUBLIC_YELLO_MAP_ID}>
+        <Map
+          defaultCenter={position}
+          defaultZoom={12}
+          mapId={process.env.NEXT_PUBLIC_YELLO_MAP_ID}
+        >
           {showDirections && <Directions />}
         </Map>
       </div>
-      <DroppedPin color='yellow' getDirections={toggleShowDirections} />
+      <DroppedPin color="yellow" getDirections={toggleShowDirections} />
     </>
   )
 }
