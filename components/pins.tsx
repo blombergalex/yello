@@ -18,8 +18,6 @@ export default function Pins({ toggleShowDirections }: { toggleShowDirections: (
     fetchData()
   }, [])
 
-  // console.log('data in pins component: ', data)
-
   return (
     <>
       {data &&

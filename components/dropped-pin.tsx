@@ -9,7 +9,7 @@ export const DroppedPin = ({
   coordinates,
   created_at,
   description,
-    injured,
+  injured,
   users,
 }: {
   getDirections: () => void
