@@ -9,19 +9,16 @@ export const DroppedPin = ({
   coordinates,
   created_at,
   description,
-  id,
-  injured,
+    injured,
   users,
 }: {
   getDirections: () => void
-  // data: pinType
   coordinates: string,
   created_at: string,
   description: string | null,
   id: string,
   injured: boolean | null,
   users: string | undefined
-
 }) => {
   
   const [open, setOpen] = useState<boolean>(false)
@@ -29,12 +26,10 @@ export const DroppedPin = ({
   const [routeBtn, setRouteBtn] = useState<boolean>(true)
   const [copied, setCopied] = useState<boolean>(false)
   
-  const skydiverPosition = {
-    lat: 60.284545435546455464565433,
-    lng: 17.445754543434,
+  const coordinatesArray = { 
+    lat: Number(coordinates.split(', ')[0]),
+    lng: Number(coordinates.split(', ')[1])
   }
-  // const positionString = `${skydiverPosition.lat}, ${skydiverPosition.lng}`
-
 
   const handleClose = () => {
     setOpen(false)
@@ -73,22 +68,33 @@ export const DroppedPin = ({
     window.open(url, '_blank')
   }
 
-  // write something that sets color if injury color = red, else yellow
-  const color = 'yellow'
+  const color = () => {
+    if (injured) {
+      return 'red'
+    } else {
+      return 'yellow'
+    }
+  }
+
+  const time = () => {
+    const date = new Date(created_at)
+    return date.toLocaleString()
+  }
 
   return (
     <div>
-      <AdvancedMarker position={skydiverPosition} onClick={() => setOpen(true)}>
-        <Pin background={color} glyphColor={color} borderColor={'black'} />
+      <AdvancedMarker position={coordinatesArray} onClick={() => setOpen(true)}>
+        <Pin background={color()} glyphColor={color()} borderColor={'black'} />
       </AdvancedMarker>
       {open && (
         <InfoWindow
-          position={skydiverPosition}
+          position={coordinatesArray}
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
-          <h2 className="font-bold">{data.users?.name}</h2>
-          <p>{data.description ?? 'No description'}</p>
+          <h2 className="font-bold">{users}</h2>
+          <p>{description ?? ''}</p>
+          <p className='text-tiny text-gray-500'>{time()}</p>
           {routeBtn ? (
             <Button
               onPress={() => controlRouteBtn()}

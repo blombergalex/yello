@@ -1,21 +1,32 @@
+import { useEffect, useState } from 'react'
 import { DroppedPin } from './dropped-pin'
-import { getPins } from '@/utils/supabase/queries'
-import { pinType } from '@/utils/supabase/queries'
+import { getPins, pinType } from '@/utils/supabase/queries'
 
-export default async function pins({ toggleShowDirections } : { toggleShowDirections: () => void }) {
-  const { data, error } = await getPins()
+export default function Pins({ toggleShowDirections }: { toggleShowDirections: () => void}) {
+  const [data, setData] = useState<pinType>([])
+  const [error, setError] = useState<Error | null>(null)
 
-  console.log('data in pins component: ', data)
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await getPins()
+      if (error) {
+        setError(error)
+      } else {
+        setData(data)
+      }
+    }
+    fetchData()
+  }, [])
 
-  // map over all pins and create a dropped pin from each
+  // console.log('data in pins component: ', data)
+
   return (
-    <section>
-      {data && //in case data is null
+    <>
+      {data &&
         data.map((pin) => (
           <DroppedPin
             key={pin.id}
             getDirections={toggleShowDirections}
-            // data={pin}
             coordinates={pin.coordinates}
             created_at={pin.created_at}
             description={pin.description}
@@ -24,6 +35,7 @@ export default async function pins({ toggleShowDirections } : { toggleShowDirect
             users={pin.users?.name}
           />
         ))}
-    </section>
+      {error && <p>{error.message}</p>}
+    </>
   )
 }
