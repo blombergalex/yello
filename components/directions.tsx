@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from "react"
 import { useMap, useMapsLibrary } from '@vis.gl/react-google-maps'
 

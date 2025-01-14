@@ -5,23 +5,36 @@ import React, { useState } from 'react'
 import { Button } from '@nextui-org/button'
 
 export const DroppedPin = ({
-  color,
   getDirections,
+  coordinates,
+  created_at,
+  description,
+  id,
+  injured,
+  users,
 }: {
-  color: string
   getDirections: () => void
-}) => {
-  const skydiverPosition = {
-    lat: 60.284545435546455464565433,
-    lng: 17.445754543434,
-  }
+  // data: pinType
+  coordinates: string,
+  created_at: string,
+  description: string | null,
+  id: string,
+  injured: boolean | null,
+  users: string | undefined
 
+}) => {
+  
   const [open, setOpen] = useState<boolean>(false)
   const [showCoords, setShowCoords] = useState<boolean>(false)
   const [routeBtn, setRouteBtn] = useState<boolean>(true)
   const [copied, setCopied] = useState<boolean>(false)
+  
+  const skydiverPosition = {
+    lat: 60.284545435546455464565433,
+    lng: 17.445754543434,
+  }
+  // const positionString = `${skydiverPosition.lat}, ${skydiverPosition.lng}`
 
-  const positionString = `${skydiverPosition.lat}, ${skydiverPosition.lng}`
 
   const handleClose = () => {
     setOpen(false)
@@ -43,7 +56,7 @@ export const DroppedPin = ({
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(positionString)
+      .writeText(coordinates)
       .then(() => {
         setCopied(true)
         setTimeout(() => {
@@ -56,9 +69,12 @@ export const DroppedPin = ({
   }
 
   const openInGoogleMaps = () => {
-    const url = `https://www.google.com/maps?q=${positionString}`
+    const url = `https://www.google.com/maps?q=${coordinates}`
     window.open(url, '_blank')
   }
+
+  // write something that sets color if injury color = red, else yellow
+  const color = 'yellow'
 
   return (
     <div>
@@ -71,8 +87,8 @@ export const DroppedPin = ({
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
-          <h2 className="font-bold">Jane Doe</h2>
-          <p>Info about jumper...</p>
+          <h2 className="font-bold">{data.users?.name}</h2>
+          <p>{data.description ?? 'No description'}</p>
           {routeBtn ? (
             <Button
               onPress={() => controlRouteBtn()}
@@ -103,7 +119,7 @@ export const DroppedPin = ({
                 Hide coordinates
               </Button>
               <div className="flex text-wrap items-center">
-                <h3 className="text-xs w-min">{positionString}</h3>
+                <h3 className="text-xs w-min">{coordinates}</h3>
                 <button className="p-2" onClick={() => handleCopy()}>
                   {copied ? (
                     <svg

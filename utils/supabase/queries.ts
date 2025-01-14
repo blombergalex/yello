@@ -1,3 +1,4 @@
+import { QueryData } from '@supabase/supabase-js'
 import { createClient } from './client'
 
 export const getPins = () => {
@@ -5,6 +6,8 @@ export const getPins = () => {
 
   return supabase
     .from('pins')
-    .select('id, created_at, coordinates, description, users("name"), injured')
-    .order('created_at', { ascending: false })
+    .select('coordinates, created_at, description, id, injured, users("name")')
+    .order('created_at', { ascending: true })
 }
+
+export type pinType = QueryData<ReturnType<typeof getPins>>
