@@ -36,6 +36,16 @@ export const SignUpForm = () => {
       className="flex w-full flex-col max-w-md gap-4"
     >
       <div className="flex flex-col gap-4 items-center mx-4">
+      <div className="w-2/3">
+          <Input
+            className={inputClasses}
+            {...register("email")}
+            label="Email"
+            name="email"
+            required
+          />
+          {errors.email && <span className={errorClasses}>{errors.email.message}</span>}
+        </div>
         <div className="w-2/3">
           <Input
             className={inputClasses}
