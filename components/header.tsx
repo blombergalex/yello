@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
 import { Moirai_One } from 'next/font/google'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
+import React, { useState } from 'react'
 
 const moiraiOne = Moirai_One({
   weight: '400',
@@ -10,7 +10,7 @@ const moiraiOne = Moirai_One({
 })
 
 export const Header = () => {
-  const {scrollY} = useScroll()
+  const { scrollY } = useScroll()
   const [hidden, setHidden] = useState<boolean>(false)
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -28,7 +28,7 @@ export const Header = () => {
         visible: { y: 0 },
         hidden: { y: '-100%' },
       }}
-      animate={hidden ? "hidden" : "visible"}
+      animate={hidden ? 'hidden' : 'visible'}
       transition={{ duraction: 0.35, ease: 'easeInOut' }}
     >
       <div className="p-2 sticky top-0 flex w-full z-10 bg-yellow-500">

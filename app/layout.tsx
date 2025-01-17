@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Providers } from '@/utils/providers'
 import { Toaster } from 'sonner'
+
+import { Providers } from '@/utils/providers'
 import { QueryClientProvider } from '@/providers/query-client-provider'
 
 export const metadata: Metadata = {
