@@ -11,7 +11,8 @@ export const createPin = async (
   data: z.infer<typeof pinSchema>
 ): Promise<ServerActionResult> => {
   const parsedData = pinSchema.parse(data);
-  const supabase = createClient();
+  
+  const supabase = await createClient();
 
   const {
     data: { user },

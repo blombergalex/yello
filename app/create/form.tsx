@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Input, Switch } from '@nextui-org/react'
+import { Button,  Switch } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Textarea } from '@nextui-org/input'
@@ -53,7 +53,6 @@ export const CreateForm = () => {
         }
         // getLocation()
       }, [])
-
 
   return (
     <form
