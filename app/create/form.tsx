@@ -65,7 +65,11 @@ export const CreateForm = () => {
       className="flex items-center w-screen flex-col gap-4 p-10 md:w-2/3"
     >
       <p>Position: {coordinates}</p>
-      <input type="hidden" {...register('coordinates')} value={coordinates} />
+          <input
+        type="hidden"
+        {...register('coordinates')}
+        value={`${coordinates}`}
+      />
       <Textarea
         {...register('description')}
         label="Name, surroundings, canopy color..."
@@ -85,7 +89,7 @@ export const CreateForm = () => {
           'Not injured'
         )}
       </Switch>
-      <input type="hidden" {...register('isInjured')} value={`${isSelected}`} />
+      <input type="hidden" {...register('injured')} value={`${isSelected}`} />
       <Button className={`${buttonClasses}`} type="submit">
         {isPending ? 'Uploading pin...' : 'Drop pin'}
       </Button>
