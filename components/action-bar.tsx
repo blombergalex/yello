@@ -3,6 +3,7 @@ import { UserCircleIcon as SolidUserCircleIcon } from '@heroicons/react/16/solid
 
 import { createClient } from '@/utils/supabase/server'
 import { LogOutButton } from './logout-button'
+import { CreateButton } from './create-button'
 
 export const ActionBar = async () => {
   const supabase = await createClient()
@@ -32,7 +33,7 @@ export const ActionBar = async () => {
   }
 
   return (
-    <section className='flex justify-between items-center p-2 bg-black'>
+    <section className="flex justify-between items-center p-2 bg-black">
       <div>
         {user ? (
           <div>
@@ -53,9 +54,7 @@ export const ActionBar = async () => {
           </Link>
         )}
       </div>
-      <div>
-        {/* large plus icon to drop pin */}
-      </div>
+      <CreateButton />
     </section>
   )
 }
