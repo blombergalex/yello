@@ -7,15 +7,15 @@ import { useForm } from "react-hook-form"
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { signUpSchema } from "@/actions/schemas"
+import { logInSchema } from "@/actions/schemas"
 import { buttonClasses, errorClasses, inputClasses } from "@/utils/classes"
 import { handleServerError } from "@/utils/action-utils"
-import { signUp } from "@/actions/sign-up";
+import { logIn } from "@/actions/log-in";
 
-export const SignUpForm = () => {
+export const LogInForm = () => {
   const { mutate, isPending } = useMutation({
-    mutationFn: async (variables:z.infer<typeof signUpSchema>) => {
-      handleServerError(await signUp(variables))
+    mutationFn: async (variables:z.infer<typeof logInSchema>) => {
+      handleServerError(await logIn(variables))
     },
     onError: (error) => toast.error(error.message),
     onSuccess: () => toast.success('Account created successfully')
@@ -25,8 +25,8 @@ export const SignUpForm = () => {
     register,
     handleSubmit,
     formState: {errors}
-  } = useForm<z.infer<typeof signUpSchema>>({
-    resolver: zodResolver(signUpSchema),
+  } = useForm<z.infer<typeof logInSchema>>({
+    resolver: zodResolver(logInSchema),
   })
 
   return (
@@ -48,15 +48,6 @@ export const SignUpForm = () => {
         <div className="w-2/3">
           <Input
             className={inputClasses}
-            {...register("username")}
-            label="Username"
-            required
-          />
-          {errors.username && <span className={errorClasses}>{errors.username.message}</span>}
-        </div>
-        <div className="w-2/3">
-          <Input
-            className={inputClasses}
             {...register("password")}
             type="password"
             label="Password"
@@ -65,7 +56,7 @@ export const SignUpForm = () => {
           {errors.password && <span className={errorClasses}>{errors.password.message}</span>}
         </div>
         <Button className={buttonClasses} type="submit" size="sm">
-          {isPending ? 'Creating...' : 'Sign up'}
+          {isPending ? 'Logging in' : 'Log in'}
         </Button>
       </div>
     </form>
