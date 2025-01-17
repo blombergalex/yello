@@ -1,6 +1,6 @@
 'use client'
 
-import { Button,  Switch } from '@nextui-org/react'
+import { Button, Switch } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Textarea } from '@nextui-org/input'
@@ -33,33 +33,39 @@ export const CreateForm = () => {
     resolver: zodResolver(pinSchema),
   })
 
-    useEffect(() => {
-        const getLocation = () => {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-              (position: GeolocationPosition) => {
-                const pos = {
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude,
-                }
-  
-                const coordinates = `${pos.lat},${pos.lng}`
-                setCoordinates(coordinates)
-              }
-            )
-          } else {
-            console.error('Error getting coordinates. Geolocation is not supported by browser')
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position: GeolocationPosition) => {
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            }
+
+            const coordinates = `${pos.lat},${pos.lng}`
+            setCoordinates(coordinates)
           }
-        }
-        // getLocation()
-      }, [])
+        )
+      } else {
+        console.error(
+          'Error getting coordinates. Geolocation is not supported by browser'
+        )
+      }
+    }
+    getLocation()
+  }, [])
+
+  console.log(coordinates)
+  console.log(isSelected)
 
   return (
     <form
       onSubmit={handleSubmit((values) => mutate(values))}
       className="flex items-center w-screen flex-col gap-4 p-10 md:w-2/3"
     >
-      <p {...register('coordinates')}>Position: {coordinates}</p>
+      <p>Position: {coordinates}</p>
+      <input type="hidden" {...register('coordinates')} value={coordinates} />
       <Textarea
         {...register('description')}
         label="Name, surroundings, canopy color..."
@@ -67,9 +73,19 @@ export const CreateForm = () => {
       {errors.content && (
         <span className={errorClasses}>{errors.content.message}</span>
       )}
-      <Switch isSelected={isSelected} onValueChange={setIsSelected} color='danger' className='self-end'>
-        {isSelected ? <p className='text-red-700 uppercase'>Injured</p> : "Not injured"}
+      <Switch
+        isSelected={isSelected}
+        onValueChange={setIsSelected}
+        color="danger"
+        className="self-end"
+      >
+        {isSelected ? (
+          <p className="text-red-700 uppercase">Injured</p>
+        ) : (
+          'Not injured'
+        )}
       </Switch>
+      <input type="hidden" {...register('isInjured')} value={`${isSelected}`} />
       <Button className={`${buttonClasses}`} type="submit">
         {isPending ? 'Uploading pin...' : 'Drop pin'}
       </Button>
