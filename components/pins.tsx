@@ -30,7 +30,7 @@ export default function Pins({ toggleShowDirections }: { toggleShowDirections: (
             description={pin.description}
             id={pin.id}
             injured={pin.injured}
-            users={pin.users?.name}
+            // users={pin.users?.username}
           />
         ))}
       {error && <p>{error.message}</p>}

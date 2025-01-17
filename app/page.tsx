@@ -13,7 +13,7 @@ export default async function Home() {
     <section className="relative flex flex-col min-h-screen">
       <Header />
       <div className="border-4 rounded-lg border-yellow-500 m-2 h-[400px]">
-      <YelloMap />
+        <YelloMap />
       </div>
       {error || data.length === 0 ? (
       <p>No pins have been dropped!</p>

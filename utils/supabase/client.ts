@@ -1,5 +1,4 @@
 // fetch wrapper instead of writing url points for every database call
-// will be updated to run on server instead
 
 import { createBrowserClient } from '@supabase/ssr'
 
@@ -11,4 +10,3 @@ export const createClient = () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 }
-

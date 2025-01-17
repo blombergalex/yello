@@ -10,7 +10,7 @@ export const DroppedPin = ({
   created_at,
   description,
   injured,
-  users,
+  // users,
 }: {
   getDirections: () => void
   coordinates: string,
@@ -18,7 +18,7 @@ export const DroppedPin = ({
   description: string | null,
   id: string,
   injured: boolean | null,
-  users: string | undefined
+  // users: string | undefined
 }) => {
   
   const [open, setOpen] = useState<boolean>(false)
@@ -92,7 +92,7 @@ export const DroppedPin = ({
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
-          <h2 className="font-bold">{users}</h2>
+          {/* <h2 className="font-bold">{users}</h2> */}
           <p>{description ?? ''}</p>
           <p className='text-tiny text-gray-500'>{time()}</p>
           {routeBtn ? (

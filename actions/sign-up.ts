@@ -11,7 +11,8 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
 
   const parsedData = signUpSchema.parse(data);
 
-  const { data: existingUsername } = await supabase.from("users")
+  const { data: existingUsername } = await supabase
+    .from("users")
     .select("username")
     .eq("username", parsedData.username)
     .single();
@@ -19,6 +20,16 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   if (existingUsername) {
     console.log(existingUsername);
     return { error: "Username already taken" };
+  }
+
+  const { data: existingUserEmail } = await supabase
+    .from("users")
+    .select("email")
+    .eq("email", parsedData.email)
+    .single();
+
+  if (existingUserEmail) {
+    return { error: "A user with this email already exists" };
   }
 
   const {
@@ -33,7 +44,7 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   if (user && user.email) {
     const { data: userInfo, error: registerError } = await supabase
       .from("users")
-      .insert([{ id: user.id, username: data.username }])
+      .insert([{ id: user.id, email: user.email, username: data.username }])
       .select("*");
 
     console.log(userInfo, registerError);
@@ -43,5 +54,5 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
     }
   }
 
-  redirect("/");
+  redirect("/log-in");
 };
