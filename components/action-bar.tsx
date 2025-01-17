@@ -28,8 +28,6 @@ export const ActionBar = async () => {
       const [{ username: fetchedUsername }] = data
       username = fetchedUsername
     }
-  } else {
-    console.log('no user found')
   }
 
   return (
@@ -48,7 +46,7 @@ export const ActionBar = async () => {
         ) : (
           <Link
             href="/log-in"
-            className="text-white text-small hover:underline underline-offset-2"
+            className="text-white text-small cursor-pointer"
           >
             Log in
           </Link>
