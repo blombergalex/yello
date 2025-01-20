@@ -31,22 +31,22 @@ export const ActionBar = async () => {
   }
 
   return (
-    <section className="flex justify-between items-center p-2 bg-black">
+    <section className="flex justify-between items-center p-2 bg-white">
       <div>
         {user ? (
           <div>
             <div className="mx-2">
-              <h3 className="text-small uppercase font-semibold text-white">
+              <h3 className="text-small uppercase font-semibold text-yellow-500">
                 {username}
               </h3>
-              <SolidUserCircleIcon className="text-white" />
+              <SolidUserCircleIcon className="text-yellow-500" />
             </div>
             <LogOutButton />
           </div>
         ) : (
           <Link
             href="/log-in"
-            className="text-white text-small cursor-pointer"
+            className="text-yellow-500 text-small cursor-pointer"
           >
             Log in
           </Link>

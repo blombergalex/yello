@@ -18,7 +18,7 @@ export const SignUpForm = () => {
       handleServerError(await signUp(variables))
     },
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success('Account created successfully')
+    onSuccess: () => toast.success('Account created successfully, proceed to log in')
   })
   
   const {

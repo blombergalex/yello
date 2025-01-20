@@ -23,6 +23,7 @@ export const CreateForm = () => {
       handleServerError(await createPin(variables))
     },
     onError: (error) => toast.error(error.message),
+    onSuccess: () => toast.success('Pin dropped, thank you!'),
   })
 
   const {
