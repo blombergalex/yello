@@ -75,8 +75,8 @@ export const CreateForm = () => {
         {...register('description')}
         label="Name, surroundings, canopy color..."
       />
-      {errors.content && (
-        <span className={errorClasses}>{errors.content.message}</span>
+      {errors.description && (
+        <span className={errorClasses}>{errors.description.message}</span>
       )}
       <Switch
         isSelected={isSelected}
@@ -90,7 +90,7 @@ export const CreateForm = () => {
           'Not injured'
         )}
       </Switch>
-      <input type="hidden" {...register('injured')} value={`${isSelected}`} />
+      <input type="hidden" {...register('isSelected')} value={`${isSelected}`} />
       <Button className={`${buttonClasses}`} type="submit">
         {isPending ? 'Uploading pin...' : 'Drop pin'}
       </Button>
