@@ -15,12 +15,13 @@ import { buttonClasses, errorClasses } from '@/utils/classes'
 import { createPin } from '@/actions/create-pin'
 
 export const CreateForm = () => {
-  const [isSelected, setIsSelected] = useState<boolean>(false)
+  const [injured, setInjured] = useState<boolean>(false)
   const [coordinates, setCoordinates] = useState<string>('')
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (variables: z.infer<typeof pinSchema>) => {
       handleServerError(await createPin(variables))
+      console.log(variables)
     },
     onError: (error) => toast.error(error.message),
     onSuccess: () => toast.success('Pin dropped, thank you!'),
@@ -30,6 +31,7 @@ export const CreateForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<z.infer<typeof pinSchema>>({
     resolver: zodResolver(pinSchema),
   })
@@ -45,9 +47,11 @@ export const CreateForm = () => {
             }
 
             const coordinates = `${pos.lat},${pos.lng}`
+            setValue('coordinates', coordinates)
             setCoordinates(coordinates)
           }
         )
+        console.log('location rendered: ', coordinates)
       } else {
         console.error(
           'Error getting coordinates. Geolocation is not supported by browser'
@@ -56,9 +60,6 @@ export const CreateForm = () => {
     }
     getLocation()
   }, [])
-
-  console.log(coordinates)
-  console.log(isSelected)
 
   return (
     <form
@@ -71,6 +72,9 @@ export const CreateForm = () => {
         {...register('coordinates')}
         value={`${coordinates}`}
       />
+      {errors.coordinates && (
+        <span className={errorClasses}>{errors.coordinates.message}</span>
+      )}
       <Textarea
         {...register('description')}
         label="Name, surroundings, canopy color..."
@@ -79,18 +83,23 @@ export const CreateForm = () => {
         <span className={errorClasses}>{errors.description.message}</span>
       )}
       <Switch
-        isSelected={isSelected}
-        onValueChange={setIsSelected}
+        onValueChange={(value) => {
+          setInjured(value)
+          setValue('injured', `${value}`)
+        }}
         color="danger"
         className="self-end"
       >
-        {isSelected ? (
+        {injured ? (
           <p className="text-red-700 uppercase">Injured</p>
         ) : (
           'Not injured'
         )}
       </Switch>
-      <input type="hidden" {...register('isSelected')} value={`${isSelected}`} />
+      <input type="hidden" {...register('injured')} value={`${injured}`} />
+      {errors.injured && (
+        <span className={errorClasses}>{errors.injured.message}</span>
+      )}
       <Button className={`${buttonClasses}`} type="submit">
         {isPending ? 'Uploading pin...' : 'Drop pin'}
       </Button>

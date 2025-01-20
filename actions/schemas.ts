@@ -14,5 +14,5 @@ export const logInSchema = z.object({
 export const pinSchema = z.object({
   description: z.string().optional(),
   coordinates: z.string(),
-  isSelected: z.boolean(),
+  injured: z.string(),
 });
