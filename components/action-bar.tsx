@@ -44,12 +44,15 @@ export const ActionBar = async () => {
             <LogOutButton />
           </div>
         ) : (
-          <Link
-            href="/log-in"
-            className="text-yellow-500 text-small cursor-pointer"
-          >
-            Log in
-          </Link>
+          <>
+            <SolidUserCircleIcon className="text-yellow-500" />
+            <Link
+              href="/log-in"
+              className="text-yellow-500 text-small cursor-pointer"
+            >
+              Log in
+            </Link>
+          </>
         )}
       </div>
       <CreateButton />

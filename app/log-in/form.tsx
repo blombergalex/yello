@@ -18,7 +18,6 @@ export const LogInForm = () => {
       handleServerError(await logIn(variables))
     },
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success('Account created successfully')
   })
   
   const {
