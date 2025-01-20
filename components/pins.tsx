@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import { DroppedPin } from './dropped-pin'
 import { getPins, pinType } from '@/utils/supabase/queries'
 
-export default function Pins({ toggleShowDirections }: { toggleShowDirections: () => void}) {
+export default function Pins({
+  toggleShowDirections,
+}: {
+  toggleShowDirections: () => void
+}) {
   const [data, setData] = useState<pinType>([])
   const [error, setError] = useState<Error | null>(null)
 
@@ -18,6 +22,8 @@ export default function Pins({ toggleShowDirections }: { toggleShowDirections: (
     fetchData()
   }, [])
 
+  console.log(data)
+
   return (
     <>
       {data &&
@@ -30,10 +36,14 @@ export default function Pins({ toggleShowDirections }: { toggleShowDirections: (
             description={pin.description}
             id={pin.id}
             injured={pin.injured}
-            // users={pin.users?.username}
+            // users={pin.users ? pin.users.username : ''}
           />
         ))}
-      {error && <p>{error.message}</p>}
+      {error && (
+        <section className="flex font-bold text-yellow-600">
+          <p>{error.message}</p>
+        </section>
+      )}
     </>
   )
 }

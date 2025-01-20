@@ -14,7 +14,7 @@ export default async function Home() {
         <YelloMap />
       </div>
       {error || data.length === 0 ? (
-        <div className='grow'>
+        <div className='flex grow'>
           <p>No pins have been dropped!</p>
         </div>
       ) : (

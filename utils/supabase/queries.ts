@@ -6,7 +6,7 @@ export const getPins = () => {
 
   return supabase
     .from('pins')
-    .select('coordinates, created_at, description, id, injured, users("name")')
+    .select('coordinates, created_at, description, id, injured, users("username")')
     .order('created_at', { ascending: true })
 }
 
