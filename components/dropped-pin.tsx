@@ -4,11 +4,14 @@ import { AdvancedMarker, InfoWindow, Pin } from '@vis.gl/react-google-maps'
 import React, { useState } from 'react'
 import { Button } from '@nextui-org/button'
 
+import { DeleteButton } from './delete-btn'
+
 export const DroppedPin = ({
   getDirections,
   coordinates,
   created_at,
   description,
+  id,
   injured,
   users,
 }: {
@@ -189,6 +192,7 @@ export const DroppedPin = ({
           >
             Open in Google Maps
           </Button>
+          <DeleteButton pinId={id} setOpen={setOpen}/>
         </InfoWindow>
       )}
     </div>

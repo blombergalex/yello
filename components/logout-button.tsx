@@ -23,7 +23,7 @@ export const LogOutButton = () => {
       onPress={handleLogOut}
       disabled={isPending}
     >
-      {isPending ? 'Logging out...' : 'Log out'}
+      {isPending ? 'Exiting...' : 'Log out'}
     </Button>
   )
 }

@@ -35,7 +35,7 @@ export const ActionBar = async () => {
       <div>
         {user ? (
           <div>
-            <div className="mx-2">
+            <div className="mx-2 text-center">
               <h3 className="text-small uppercase font-semibold text-yellow-500">
                 {username}
               </h3>

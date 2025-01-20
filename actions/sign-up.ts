@@ -54,5 +54,5 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
     }
   }
 
-  redirect("/log-in")
+  redirect("/")
 };
