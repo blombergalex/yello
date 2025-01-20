@@ -10,7 +10,7 @@ export const DroppedPin = ({
   created_at,
   description,
   injured,
-  // users,
+  users,
 }: {
   getDirections: () => void
   coordinates: string,
@@ -18,7 +18,7 @@ export const DroppedPin = ({
   description: string | null,
   id: string,
   injured: boolean | null,
-  // users: string | undefined
+  users: string | undefined
 }) => {
   
   const [open, setOpen] = useState<boolean>(false)
@@ -30,6 +30,15 @@ export const DroppedPin = ({
     lat: Number(coordinates.split(', ')[0]),
     lng: Number(coordinates.split(', ')[1])
   }
+
+  console.log('coordarray: ', coordinatesArray)
+  
+  const gubbangen = {
+    lat: 59.26466205817659,
+    lng: 18.081463238506704
+  }
+
+  console.log('gubbangen: ', gubbangen) 
 
   const handleClose = () => {
     setOpen(false)
@@ -83,16 +92,17 @@ export const DroppedPin = ({
 
   return (
     <div>
-      <AdvancedMarker position={coordinatesArray} onClick={() => setOpen(true)}>
+      <AdvancedMarker position={gubbangen} onClick={() => setOpen(true)}>
         <Pin background={color()} glyphColor={color()} borderColor={'black'} />
       </AdvancedMarker>
       {open && (
         <InfoWindow
-          position={coordinatesArray}
+          // position={coordinatesArray}
+          position={gubbangen}
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
-          {/* <h2 className="font-bold">{users}</h2> */}
+          <h2 className="font-bold">{users}</h2>
           <p>{description ?? ''}</p>
           <p className='text-tiny text-gray-500'>{time()}</p>
           {routeBtn ? (

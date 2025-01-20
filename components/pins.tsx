@@ -36,7 +36,7 @@ export default function Pins({
             description={pin.description}
             id={pin.id}
             injured={pin.injured}
-            // users={pin.users ? pin.users.username : ''}
+            users={pin.users?.username}
           />
         ))}
       {error && (
