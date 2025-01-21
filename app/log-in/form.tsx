@@ -19,6 +19,9 @@ export const LogInForm = () => {
       handleServerError(await logIn(variables))
     },
     onError: (error) => toast.error(error.message),
+    onSuccess: () => {
+      handleRedirect('/')
+    }
   })
   
   const {
@@ -55,7 +58,7 @@ export const LogInForm = () => {
           />
           {errors.password && <span className={errorClasses}>{errors.password.message}</span>}
         </div>
-        <Button className={buttonClasses} type="submit" size="sm" onPress={() => handleRedirect('/')} disabled={isPending}>
+        <Button className={buttonClasses} type="submit" size="sm" disabled={isPending}>
           {isPending ? 'Logging in' : 'Log in'}
         </Button>
       </div>

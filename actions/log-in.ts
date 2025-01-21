@@ -1,7 +1,6 @@
 "use server";
 
 import { z } from "zod";
-import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 import { logInSchema } from "./schemas";
@@ -16,9 +15,6 @@ export const logIn = async (
 
   const { error } = await supabase.auth.signInWithPassword(parsedData);
   if (error) {
-    console.error("error: ", error?.message);
     return { error: error.message};
   }
-
-  redirect("/");
 };

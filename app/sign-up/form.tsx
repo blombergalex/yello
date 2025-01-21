@@ -19,8 +19,11 @@ export const SignUpForm = () => {
       handleServerError(await signUp(variables))
     },
     onError: (error) => toast.error(error.message),
-    onSuccess: () =>
-      toast.success('Account created successfully, proceed to log in'),
+    onSuccess: () => 
+    {
+      toast.success('Account created successfully, proceed to log in')
+      handleRedirect('/log-in')
+    },
     onSettled: () => toast.dismiss(),
   })
 
@@ -77,7 +80,7 @@ export const SignUpForm = () => {
           className={buttonClasses}
           type="submit"
           size="sm"
-          onPress={() => handleRedirect('/log-in')}
+          // onPress={() => handleRedirect('/log-in')}
           disabled={isPending}
         >
           {isPending ? 'Creating...' : 'Sign up'}
