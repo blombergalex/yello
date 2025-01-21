@@ -50,15 +50,21 @@ export const ActionBar = async () => {
           </div>
         </div>
       ) : (
-        <>
-          <SolidUserCircleIcon className="text-white" />
-          <Link
-            href="/log-in"
-            className="text-white text-small cursor-pointer"
-          >
+        <div className="grid grid-cols-3 items-center bg-yellow-500 w-screen px-2">
+        <Link href='/log-in' className="flex flex-col justify-start">
+          <h3 className="text-small uppercase font-semibold text-white w-fit items-center">
             Log in
-          </Link>
-        </>
+          </h3>
+          <div className="flex items-center">
+            <SolidUserCircleIcon className="text-white size-11" />
+          </div>
+        </Link>
+        <div className='flex justify-center'>
+          <CreateButton />
+        </div>
+        <div className='flex justify-end'>
+        </div>
+      </div>
       )}
     </section>
   )
