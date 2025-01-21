@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
+import { handleRedirect } from '@/utils/handle-redirect'
 import { handleServerError } from '@/utils/action-utils'
 import { pinSchema } from '@/actions/schemas'
 import { buttonClasses, errorClasses } from '@/utils/classes'
@@ -77,7 +78,7 @@ export const CreateForm = () => {
       )}
       <Textarea
         {...register('description')}
-        label="Name, surroundings, canopy color..."
+        label="Names of others with you, phone number, surroundings..."
       />
       {errors.description && (
         <span className={errorClasses}>{errors.description.message}</span>
@@ -100,7 +101,7 @@ export const CreateForm = () => {
       {errors.injured && (
         <span className={errorClasses}>{errors.injured.message}</span>
       )}
-      <Button className={`${buttonClasses}`} type="submit">
+      <Button className={`${buttonClasses}`} type="submit" onPress={() => handleRedirect('/')} disabled={isPending}>
         {isPending ? 'Uploading pin...' : 'Drop pin'}
       </Button>
     </form>

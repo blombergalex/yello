@@ -11,6 +11,7 @@ import { logInSchema } from "@/actions/schemas"
 import { buttonClasses, errorClasses, inputClasses } from "@/utils/classes"
 import { handleServerError } from "@/utils/action-utils"
 import { logIn } from "@/actions/log-in";
+import { handleRedirect } from "@/utils/handle-redirect"
 
 export const LogInForm = () => {
   const { mutate, isPending } = useMutation({
@@ -54,7 +55,7 @@ export const LogInForm = () => {
           />
           {errors.password && <span className={errorClasses}>{errors.password.message}</span>}
         </div>
-        <Button className={buttonClasses} type="submit" size="sm">
+        <Button className={buttonClasses} type="submit" size="sm" onPress={() => handleRedirect('/')} disabled={isPending}>
           {isPending ? 'Logging in' : 'Log in'}
         </Button>
       </div>

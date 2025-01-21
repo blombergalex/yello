@@ -1,14 +1,14 @@
-import { Button } from '@nextui-org/button'
 import { toast } from 'sonner'
 import { useMutation } from '@tanstack/react-query'
 
 import { deletePin } from '@/actions/delete-pin'
+import { handleRedirect } from '@/utils/handle-redirect'
 
 export const DeleteButton = ({
   pinId,
   setOpen,
 }: {
-  pinId: string,
+  pinId: string
   setOpen: (state: boolean) => void
 }) => {
   const { mutate } = useMutation({
@@ -19,17 +19,17 @@ export const DeleteButton = ({
     onSettled: () => {
       toast.dismiss()
       setOpen(false)
-    }
+    },
   })
 
+  const handleClick = () => {
+    mutate()
+    handleRedirect('/')
+  }
+
   return (
-    <Button
-      size="sm"
-      radius="sm"
-      className="bg-red-500"
-      onPress={() => mutate()}
-    >
-      Delete pin
-    </Button>
+      <a onClick={() => handleClick()}>
+        Got picked up? Delete pin
+      </a>
   )
 }
