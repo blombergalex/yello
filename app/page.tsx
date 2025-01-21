@@ -7,17 +7,17 @@ export default async function Home() {
   const { data, error } = await getPins()
 
   return (
-    <section className="relative flex flex-col min-h-screen">
+    <section className="relative flex flex-col h-screen">
       <Header />
-      <div className="border-4 rounded-lg border-yellow-500 m-2 h-[600px]">
+      <div className="flex grow border-4 rounded-lg border-yellow-500 m-2">
         <YelloMap />
       </div>
       {error || data.length === 0 ? (
-        <div className="flex grow p-2">
+        <div className="flex p-2">
           <p>No pins dropped.</p>
         </div>
       ) : (
-        <div className="flex grow p-2">
+        <div className="flex p-2">
           {/* <p>List of pins goes here</p> */}
         </div>
       )}
