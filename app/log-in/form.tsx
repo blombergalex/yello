@@ -19,9 +19,10 @@ export const LogInForm = () => {
       handleServerError(await logIn(variables))
     },
     onError: (error) => toast.error(error.message),
+    onMutate: () => toast.loading('Logging in...'),
     onSuccess: () => {
       handleRedirect('/')
-    }
+    },
   })
   
   const {
