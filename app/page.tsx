@@ -5,7 +5,6 @@ import { getPins } from '@/utils/supabase/queries'
 
 export default async function Home() {
   const { data, error } = await getPins()
-  // console.log('data in home: ', data)
 
   return (
     <section className="relative flex flex-col min-h-screen">
@@ -14,8 +13,8 @@ export default async function Home() {
         <YelloMap />
       </div>
       {error || data.length === 0 ? (
-        <div className='flex grow'>
-          <p>No pins have been dropped!</p>
+        <div className='flex grow p-2'>
+          <p>No pins dropped.</p>
         </div>
       ) : (
         <p className='grow'>List of pins goes here</p>

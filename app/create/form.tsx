@@ -66,7 +66,7 @@ export const CreateForm = () => {
       onSubmit={handleSubmit((values) => mutate(values))}
       className="flex items-center w-screen flex-col gap-4 p-10 md:w-2/3"
     >
-      <p>Position: {coordinates}</p>
+      <p><span className='text-gray-400'>Position</span> {coordinates}</p>
           <input
         type="hidden"
         {...register('coordinates')}

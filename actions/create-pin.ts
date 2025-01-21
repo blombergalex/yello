@@ -3,7 +3,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { pinSchema } from './schemas'
 import { z } from 'zod'
-import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { ServerActionResult } from '@/utils/action-utils'
 
@@ -40,5 +39,4 @@ export const createPin = async (
     .throwOnError()
 
   revalidatePath('/')
-  redirect('/')
 }

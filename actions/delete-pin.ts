@@ -1,8 +1,6 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 export const deletePin = async (pinId: string) => {
   const supabase = await createClient()
@@ -27,7 +25,4 @@ export const deletePin = async (pinId: string) => {
   }
 
   await supabase.from('pins').delete().eq('id', pinId).throwOnError()
-
-  revalidatePath('/') // doesn't refresh map - why?
-  redirect('/') // not working to remove focus from infoWindow
 }
