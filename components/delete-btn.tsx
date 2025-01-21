@@ -29,7 +29,7 @@ export const DeleteButton = ({
 
   return (
       <a onClick={() => handleClick()}>
-        Got picked up? Delete pin
+        Got picked up? <span className='underline underline-offset-2'>Delete pin</span>
       </a>
   )
 }

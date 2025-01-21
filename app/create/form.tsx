@@ -25,7 +25,10 @@ export const CreateForm = () => {
       console.log(variables)
     },
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success('Pin dropped, thank you!'),
+    onSuccess: () => {
+      toast.success('Pin dropped, thank you!')
+      handleRedirect('/')
+    }
   })
 
   const {
@@ -101,7 +104,7 @@ export const CreateForm = () => {
       {errors.injured && (
         <span className={errorClasses}>{errors.injured.message}</span>
       )}
-      <Button className={`${buttonClasses}`} type="submit" onPress={() => handleRedirect('/')} disabled={isPending}>
+      <Button className={`${buttonClasses}`} type="submit" disabled={isPending}>
         {isPending ? 'Uploading pin...' : 'Drop pin'}
       </Button>
     </form>
