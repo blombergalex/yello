@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 
 import { deletePin } from '@/actions/delete-pin'
 import { handleRedirect } from '@/utils/handle-redirect'
+import { handleServerError } from '@/utils/action-utils'
 
 export const DeleteButton = ({
   pinId,
@@ -12,7 +13,9 @@ export const DeleteButton = ({
   setOpen: (state: boolean) => void
 }) => {
   const { mutate } = useMutation({
-    mutationFn: () => deletePin(pinId),
+    mutationFn: async () => {
+      handleServerError(await deletePin(pinId))
+    },
     onError: (error) => toast.error(error.message),
     onSuccess: () => {
       toast.success('Pin deleted')
