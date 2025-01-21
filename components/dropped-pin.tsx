@@ -28,20 +28,20 @@ export const DroppedPin = ({
   const [showCoords, setShowCoords] = useState<boolean>(false)
   const [routeBtn, setRouteBtn] = useState<boolean>(true)
   const [copied, setCopied] = useState<boolean>(false)
+  const [coordinatesArray, setCoordinatesArray] = useState<{ lat: number; lng: number; }| null>(null)
   
-  const coordinatesArray = { 
+  const refactorCoordinates = { 
     lat: Number(coordinates.split(', ')[0]),
     lng: Number(coordinates.split(', ')[1])
   }
 
-  console.log('coordarray: ', coordinatesArray)
-  
-  const gubbangen = {
-    lat: 59.26466205817659,
-    lng: 18.081463238506704
-  }
+  console.log('coordinates before set: ', coordinatesArray)
+  setCoordinatesArray(refactorCoordinates) // not working, only logs NaN infinitely 
 
-  console.log('gubbangen: ', gubbangen) 
+  console.log('coordinates after set: ', coordinatesArray)
+  
+  // once the coordinates array is loaded, map the data to load the pins
+  // otherwise pins try to load before coordinates are in lat/lng format
 
   const handleClose = () => {
     setOpen(false)
@@ -94,14 +94,15 @@ export const DroppedPin = ({
   }
 
   return (
+      // {coordinatesArray && 
     <div>
-      <AdvancedMarker position={gubbangen} onClick={() => setOpen(true)}>
+      <AdvancedMarker position={coordinatesArray} onClick={() => setOpen(true)}>
         <Pin background={color()} glyphColor={color()} borderColor={'black'} />
       </AdvancedMarker>
       {open && (
         <InfoWindow
-          // position={coordinatesArray}
-          position={gubbangen}
+          position={coordinatesArray}
+          // position={gubbangen}
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
@@ -197,4 +198,4 @@ export const DroppedPin = ({
       )}
     </div>
   )
-}
+    }
