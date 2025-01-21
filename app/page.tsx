@@ -13,11 +13,13 @@ export default async function Home() {
         <YelloMap />
       </div>
       {error || data.length === 0 ? (
-        <div className='flex grow p-2'>
+        <div className="flex grow p-2">
           <p>No pins dropped.</p>
         </div>
       ) : (
-        <p className='grow'>List of pins goes here</p>
+        <div className="flex grow p-2">
+          <p>List of pins goes here</p>
+        </div>
       )}
       <ActionBar />
     </section>

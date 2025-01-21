@@ -12,26 +12,25 @@ import { buttonClasses, errorClasses, inputClasses } from '@/utils/classes'
 import { handleServerError } from '@/utils/action-utils'
 import { signUp } from '@/actions/sign-up'
 
-export const SignUpForm = () => { 
+export const SignUpForm = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (variables: z.infer<typeof signUpSchema>) => {
       handleServerError(await signUp(variables))
     },
     onError: (error) => toast.error(error.message),
-    onSuccess: () => {
-      toast.success('Account created successfully, proceed to log in');
-    },
+    onSuccess: () => toast.success('Account created successfully, proceed to log in'),
+    onMutate: () =>  toast.loading('Creating account...'),
+    onSettled: () => toast.dismiss(),
   })
- 
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
-  },
-)
-  
+  })
+
   return (
     <form
       onSubmit={handleSubmit((values) => mutate(values))}
