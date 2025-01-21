@@ -4,14 +4,14 @@ import Link from "next/link"
 
 export const CreateButton = () => {
   return (
-    <Link href={'/create'} className="bg-transparent w-fit h-fit p-0 rounded-3xl" onClick={() => {console.log('create clicked')}}>
+    <Link href={'/create'} className="bg-transparent w-fit h-fit p-0 rounded-3xl">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="size-16 text-yellow-400"
+        className="size-20 text-white"
         >
         <path
           strokeLinecap="round"

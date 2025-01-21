@@ -18,7 +18,7 @@ export default async function Home() {
         </div>
       ) : (
         <div className="flex grow p-2">
-          <p>List of pins goes here</p>
+          {/* <p>List of pins goes here</p> */}
         </div>
       )}
       <ActionBar />

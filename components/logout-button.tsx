@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Button } from '@nextui-org/react'
 import { logOut } from '@/actions/log-out'
-import { logOutButtonClasses } from '@/utils/classes'
 
 export const LogOutButton = () => {
   const [isPending, setIsPending] = useState(false)
@@ -19,11 +18,11 @@ export const LogOutButton = () => {
 
   return (
     <Button
-      className={logOutButtonClasses}
+      className="border-1 border-white w-fit bg-transparent self-center text-white"
       onPress={handleLogOut}
       disabled={isPending}
     >
-      {isPending ? 'Exiting...' : 'Log out'}
+      {isPending ? 'Bye...' : 'Log out'}
     </Button>
   )
 }
