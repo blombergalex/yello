@@ -14,7 +14,10 @@ export const DeleteButton = ({
   const { mutate } = useMutation({
     mutationFn: () => deletePin(pinId),
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success('Pin deleted'),
+    onSuccess: () => {
+      toast.success('Pin deleted')
+      handleRedirect('/')
+    },
     onMutate: () => toast.loading('Deleting pin'),
     onSettled: () => {
       toast.dismiss()
@@ -22,13 +25,8 @@ export const DeleteButton = ({
     },
   })
 
-  const handleClick = () => {
-    mutate()
-    handleRedirect('/')
-  }
-
   return (
-      <a onClick={() => handleClick()}>
+      <a onClick={() => mutate()}>
         Got picked up? <span className='underline underline-offset-2'>Delete pin</span>
       </a>
   )
