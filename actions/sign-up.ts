@@ -4,7 +4,6 @@ import { z } from 'zod'
 
 import { createClient } from '@/utils/supabase/server'
 import { signUpSchema } from './schemas'
-import { revalidatePath } from 'next/cache'
 
 export const signUp = async (data: z.infer<typeof signUpSchema>) => {
   const supabase = await createClient()
@@ -50,6 +49,4 @@ export const signUp = async (data: z.infer<typeof signUpSchema>) => {
       return { error: 'Could not register public user', userInfo }
     }
   }
-
-  revalidatePath('/sign-up')
 }

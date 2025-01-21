@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { signUpSchema } from '@/actions/schemas'
 import { buttonClasses, errorClasses, inputClasses } from '@/utils/classes'
+import { handleRedirect } from '@/utils/handle-redirect'
 import { handleServerError } from '@/utils/action-utils'
 import { signUp } from '@/actions/sign-up'
 
@@ -18,8 +19,8 @@ export const SignUpForm = () => {
       handleServerError(await signUp(variables))
     },
     onError: (error) => toast.error(error.message),
-    onSuccess: () => toast.success('Account created successfully, proceed to log in'),
-    onMutate: () =>  toast.loading('Creating account...'),
+    onSuccess: () =>
+      toast.success('Account created successfully, proceed to log in'),
     onSettled: () => toast.dismiss(),
   })
 
@@ -72,7 +73,12 @@ export const SignUpForm = () => {
             <span className={errorClasses}>{errors.password.message}</span>
           )}
         </div>
-        <Button className={buttonClasses} type="submit" size="sm">
+        <Button
+          className={buttonClasses}
+          type="submit"
+          size="sm"
+          onPress={() => handleRedirect('/log-in')}
+        >
           {isPending ? 'Creating...' : 'Sign up'}
         </Button>
       </div>
