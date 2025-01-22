@@ -25,7 +25,7 @@ export const DroppedPin = ({
   id: string
   injured: boolean | null
   username: string | undefined
-  user_id: string,
+  user_id: string
 }) => {
   const [open, setOpen] = useState<boolean>(false)
   const [showCoords, setShowCoords] = useState<boolean>(false)
@@ -120,18 +120,12 @@ export const DroppedPin = ({
     }
     fetchUser()
   }, [])
-  
-  console.log('current user: ', currentUser?.id)
-  // console.log('pin id: ', pin.user_id)
 
   const userIsOwner = currentUser?.id === user_id
-  console.log('USER OWNER: ', userIsOwner)
-  // const userIsAdmin = currentUser?. === 
-
-  const userIsAdmin = userIsOwner || currentUser?.email === 'blombergalexandras@gmail.com' || currentUser?.email === 'styrelse@skydive.se'
-  // console.log('owner: ', userIsOwner, 'admin: ', userIsAdmin)
-
-  console.log('admin ', userIsAdmin)
+  const userIsAdmin =
+    userIsOwner ||
+    currentUser?.email === 'blombergalexandras@gmail.com' ||
+    currentUser?.email === 'styrelse@skydive.se'
 
   return (
     <div>

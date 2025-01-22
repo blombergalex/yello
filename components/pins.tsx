@@ -22,8 +22,6 @@ export default function Pins({
     fetchData()
   }, [])
 
-  console.log('data', data)
-
   return (
     <>
       {data &&
