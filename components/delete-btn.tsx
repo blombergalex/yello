@@ -16,7 +16,10 @@ export const DeleteButton = ({
     mutationFn: async () => {
       handleServerError(await deletePin(pinId))
     },
-    onError: (error) => toast.error(error.message),
+    onError: (error) => {
+      toast.error(error.message)
+      toast.dismiss()
+    },
     onSuccess: () => {
       toast.success('Pin deleted')
       handleRedirect('/')
