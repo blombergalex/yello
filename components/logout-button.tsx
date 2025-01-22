@@ -18,7 +18,7 @@ export const LogOutButton = () => {
 
   return (
     <Button
-      className="border-1 border-white w-fit bg-transparent self-center text-white"
+      className="font-bold uppercase w-fit bg-white self-center text-yellow-500"
       onPress={handleLogOut}
       disabled={isPending}
     >

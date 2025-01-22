@@ -33,15 +33,21 @@ export const ActionBar = async () => {
   return (
     <section>
       {user ? (
-        <div className="grid grid-cols-3 items-center bg-yellow-500 w-screen px-2">
-          <div className="flex flex-col justify-start">
-            <h3 className="text-small uppercase font-semibold text-white w-fit items-center ml-1">
+        <div className="grid grid-cols-3 items-end bg-yellow-500 w-screen p-2">
+
+          <div className="flex flex-col items-start">
+            <div className='flex flex-col items-center'>
+
+            <div className="flex items-center">
+              <SolidUserCircleIcon className="text-white size-11 w-fit" />
+            </div>
+            <h3 className="text-small uppercase font-semibold text-white w-min items-center">
               {username}
             </h3>
-            <div className="flex items-center">
-              <SolidUserCircleIcon className="text-white size-11" />
+
             </div>
           </div>
+
           <div className='flex justify-center'>
             <CreateButton />
           </div>
