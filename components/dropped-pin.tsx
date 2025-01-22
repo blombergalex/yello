@@ -32,15 +32,9 @@ export const DroppedPin = ({
     lng: number
   } | null>(null)
 
-  // const refactorCoordinates = {
-  //   lat: Number(coordinates.split(', ')[0]),
-  //   lng: Number(coordinates.split(', ')[1])
-  // }
-
   const parseCoordinates = (
     coordinates: string
   ): { lat: number; lng: number } | null => {
-    // specifies the type of the parameter passed in, and the return value
     const parts = coordinates.split(',')
     if (parts.length === 2) {
       const lat = Number(parts[0])
@@ -53,15 +47,10 @@ export const DroppedPin = ({
     return null
   }
 
-  console.log('coordinates: ', coordinates)
-  
   useEffect(() => {
     const parsedCoords = parseCoordinates(coordinates)
-    console.log('parsed coordinates in useEffect: ', parsedCoords)
-    setCoordinatesArray(parsedCoords) // not working, only logs NaN infinitely
+    setCoordinatesArray(parsedCoords)
   }, [coordinates])
-  
-  console.log('coordinatesArray: ', coordinatesArray)
 
   const handleClose = () => {
     setOpen(false)
@@ -92,6 +81,7 @@ export const DroppedPin = ({
       })
       .catch((err) => {
         console.error('Failed to copy text: ', err)
+        throw new Error('Failed to copy text', err)
       })
   }
 
@@ -121,7 +111,6 @@ export const DroppedPin = ({
       {open && (
         <InfoWindow
           position={coordinatesArray}
-          // position={gubbangen}
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
