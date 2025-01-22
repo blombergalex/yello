@@ -28,7 +28,7 @@ export const CreateForm = () => {
     onSuccess: () => {
       toast.success('Pin dropped, thank you!')
       handleRedirect('/')
-    }
+    },
   })
 
   const {
@@ -68,10 +68,12 @@ export const CreateForm = () => {
   return (
     <form
       onSubmit={handleSubmit((values) => mutate(values))}
-      className="flex items-center w-screen flex-col gap-4 p-10 md:w-2/3"
+      className="flex items-center w-screen flex-col gap-4 p-10 w-2/3"
     >
-      <p><span className='text-gray-400'>Position</span> {coordinates}</p>
-          <input
+      <p>
+        <span className="text-gray-400">Position</span> {coordinates}
+      </p>
+      <input
         type="hidden"
         {...register('coordinates')}
         value={`${coordinates}`}

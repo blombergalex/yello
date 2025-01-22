@@ -12,7 +12,7 @@ export const deletePin = async (pinId: string) => {
     .single()
 
   if (pinError || !pin) {
-    throw new Error('Could not get pin')
+   return { error: 'Could not get pin'}
   }
 
   const {
@@ -21,7 +21,7 @@ export const deletePin = async (pinId: string) => {
   const isPinCreator = user && user.id === pin?.user_id
 
   if (!isPinCreator) {
-    throw new Error('You are not allowed to delete this pin')
+    return {error: 'You are not allowed to delete this pin'}
   }
 
   await supabase.from('pins').delete().eq('id', pinId).throwOnError()
