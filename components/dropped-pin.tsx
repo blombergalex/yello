@@ -15,7 +15,8 @@ export const DroppedPin = ({
   description,
   id,
   injured,
-  users,
+  username,
+  user_id,
 }: {
   getDirections: () => void
   coordinates: string
@@ -23,7 +24,8 @@ export const DroppedPin = ({
   description: string | null
   id: string
   injured: boolean | null
-  users: string | undefined
+  username: string | undefined
+  user_id: string,
 }) => {
   const [open, setOpen] = useState<boolean>(false)
   const [showCoords, setShowCoords] = useState<boolean>(false)
@@ -119,13 +121,17 @@ export const DroppedPin = ({
     fetchUser()
   }, [])
   
-  // console.log('current user: ', currentUser?.id)
+  console.log('current user: ', currentUser?.id)
   // console.log('pin id: ', pin.user_id)
 
-  const userIsOwner = currentUser?.id === id
-  const userIsAdmin = currentUser?.email === 'blombergalexandras@gmail.com' || currentUser?.email === 'styrelse@skydive.se'
+  const userIsOwner = currentUser?.id === user_id
+  console.log('USER OWNER: ', userIsOwner)
+  // const userIsAdmin = currentUser?. === 
 
+  const userIsAdmin = userIsOwner || currentUser?.email === 'blombergalexandras@gmail.com' || currentUser?.email === 'styrelse@skydive.se'
   // console.log('owner: ', userIsOwner, 'admin: ', userIsAdmin)
+
+  console.log('admin ', userIsAdmin)
 
   return (
     <div>
@@ -138,7 +144,7 @@ export const DroppedPin = ({
           onCloseClick={() => handleClose()}
           className="flex flex-col items-start w-full space-y-2 p-1"
         >
-          <h2 className="font-bold">{users}</h2>
+          <h2 className="font-bold">{username}</h2>
           <p>{description ?? ''}</p>
           <p className="text-tiny text-gray-500">{time()}</p>
           {routeBtn ? (
@@ -225,7 +231,7 @@ export const DroppedPin = ({
           >
             Open in Google Maps
           </Button>
-          <DeleteButton pinId={id} setOpen={setOpen} />
+          {userIsAdmin && <DeleteButton pinId={id} setOpen={setOpen} />}
         </InfoWindow>
       )}
     </div>

@@ -9,15 +9,15 @@ export default async function Home() {
   return (
     <section className="relative flex flex-col h-screen">
       <Header />
-      <div className="flex grow border-4 rounded-lg border-yellow-500 m-2">
+      <div className="flex h-2/3 border-4 rounded-lg border-yellow-500 m-2">
         <YelloMap />
       </div>
       {error || data.length === 0 ? (
-        <div className="flex p-2">
+        <div className="flex p-2 grow">
           <p>No pins dropped.</p>
         </div>
       ) : (
-        <div className="flex p-2">
+        <div className="flex p-2 grow">
           {/* <p>List of pins goes here</p> */}
         </div>
       )}

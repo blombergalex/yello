@@ -25,7 +25,7 @@ export default function Pins({
   console.log('data', data)
 
   return (
-    <>
+    <section className='flex flex-col'>
       {data &&
         data.map((pin) => (
           <DroppedPin
@@ -36,15 +36,15 @@ export default function Pins({
             description={pin.description}
             id={pin.id}
             injured={pin.injured}
-            users={pin.users?.username}
-            // user_id={pin.users?.user_id} // I have pin.description why not pin.user_id when it's in the table????
+            username={pin.users?.username}
+            user_id={pin.user_id} // I have pin.description why not pin.user_id when it's in the table????
           />
         ))}
       {error && (
-        <section className="flex font-bold text-yellow-600">
+        <div className="font-bold text-yellow-600">
           <p>{error.message}</p>
-        </section>
+        </div>
       )}
-    </>
+    </section>
   )
 }
