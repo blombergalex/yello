@@ -33,6 +33,6 @@ export const DeleteButton = ({
   })
 
   return (
-        <Button onPress={() => mutate()} className='bg-black text-white text-tiny h-fit p-2 rounded-small'>Delete</Button>
+    <Button onPress={() => mutate()} className='bg-black text-white text-tiny h-fit p-2 rounded-small'>Delete</Button>
   )
 }
