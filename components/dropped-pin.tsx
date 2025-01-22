@@ -3,6 +3,7 @@
 import { AdvancedMarker, InfoWindow, Pin } from '@vis.gl/react-google-maps'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@nextui-org/button'
+import { toast } from 'sonner'
 
 import { DeleteButton } from './delete-btn'
 import { User } from '@/utils/get-user'
@@ -47,7 +48,6 @@ export const DroppedPin = ({
       const lat = Number(parts[0])
       const lng = Number(parts[1])
       if (!isNaN(lat) && !isNaN(lng)) {
-        console.log('lat, lng: ', lat, lng)
         return { lat, lng }
       }
     }
@@ -82,13 +82,14 @@ export const DroppedPin = ({
       .writeText(coordinates)
       .then(() => {
         setCopied(true)
+        toast.success('Copied to clipboard!')
         setTimeout(() => {
           setCopied(false)
         }, 3000)
       })
       .catch((err) => {
         console.error('Failed to copy text: ', err)
-        throw new Error('Failed to copy text', err)
+        toast.error('Failed to copy, please try again')
       })
   }
 
@@ -118,13 +119,13 @@ export const DroppedPin = ({
     fetchUser()
   }, [])
   
-  console.log('current user: ', currentUser?.id)
-  console.log('pin id: ', pin.user_id)
+  // console.log('current user: ', currentUser?.id)
+  // console.log('pin id: ', pin.user_id)
 
   const userIsOwner = currentUser?.id === id
   const userIsAdmin = currentUser?.email === 'blombergalexandras@gmail.com' || currentUser?.email === 'styrelse@skydive.se'
 
-  console.log('owner: ', userIsOwner, 'admin: ', userIsAdmin)
+  // console.log('owner: ', userIsOwner, 'admin: ', userIsAdmin)
 
   return (
     <div>

@@ -22,6 +22,8 @@ export default function Pins({
     fetchData()
   }, [])
 
+  console.log('data', data)
+
   return (
     <>
       {data &&
@@ -35,7 +37,7 @@ export default function Pins({
             id={pin.id}
             injured={pin.injured}
             users={pin.users?.username}
-            user_id={pin.user_id} // I have pin.description why not pin.user_id when it's in the table????
+            // user_id={pin.users?.user_id} // I have pin.description why not pin.user_id when it's in the table????
           />
         ))}
       {error && (
