@@ -43,6 +43,7 @@ export const LogInForm = () => {
           <Input
             className={inputClasses}
             {...register("email")}
+            type="text"
             label="Email"
             name="email"
             required

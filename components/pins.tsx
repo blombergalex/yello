@@ -22,7 +22,7 @@ export default function Pins({
     fetchData()
   }, [])
 
-  console.log(data)
+  console.log('Data mapped to create DroppedPin:' ,data)
 
   return (
     <>

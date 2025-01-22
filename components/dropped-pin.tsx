@@ -1,7 +1,7 @@
 'use client'
 
 import { AdvancedMarker, InfoWindow, Pin } from '@vis.gl/react-google-maps'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@nextui-org/button'
 
 import { DeleteButton } from './delete-btn'
@@ -16,32 +16,52 @@ export const DroppedPin = ({
   users,
 }: {
   getDirections: () => void
-  coordinates: string,
-  created_at: string,
-  description: string | null,
-  id: string,
-  injured: boolean | null,
+  coordinates: string
+  created_at: string
+  description: string | null
+  id: string
+  injured: boolean | null
   users: string | undefined
 }) => {
-  
   const [open, setOpen] = useState<boolean>(false)
   const [showCoords, setShowCoords] = useState<boolean>(false)
   const [routeBtn, setRouteBtn] = useState<boolean>(true)
   const [copied, setCopied] = useState<boolean>(false)
-  const [coordinatesArray, setCoordinatesArray] = useState<{ lat: number; lng: number; }| null>(null)
-  
-  const refactorCoordinates = { 
-    lat: Number(coordinates.split(', ')[0]),
-    lng: Number(coordinates.split(', ')[1])
+  const [coordinatesArray, setCoordinatesArray] = useState<{
+    lat: number
+    lng: number
+  } | null>(null)
+
+  // const refactorCoordinates = {
+  //   lat: Number(coordinates.split(', ')[0]),
+  //   lng: Number(coordinates.split(', ')[1])
+  // }
+
+  const parseCoordinates = (
+    coordinates: string
+  ): { lat: number; lng: number } | null => {
+    // specifies the type of the parameter passed in, and the return value
+    const parts = coordinates.split(',')
+    if (parts.length === 2) {
+      const lat = Number(parts[0])
+      const lng = Number(parts[1])
+      if (!isNaN(lat) && !isNaN(lng)) {
+        console.log('lat, lng: ', lat, lng)
+        return { lat, lng }
+      }
+    }
+    return null
   }
 
-  console.log('coordinates before set: ', coordinatesArray)
-  setCoordinatesArray(refactorCoordinates) // not working, only logs NaN infinitely 
-
-  console.log('coordinates after set: ', coordinatesArray)
+  console.log('coordinates: ', coordinates)
   
-  // once the coordinates array is loaded, map the data to load the pins
-  // otherwise pins try to load before coordinates are in lat/lng format
+  useEffect(() => {
+    const parsedCoords = parseCoordinates(coordinates)
+    console.log('parsed coordinates in useEffect: ', parsedCoords)
+    setCoordinatesArray(parsedCoords) // not working, only logs NaN infinitely
+  }, [coordinates])
+  
+  console.log('coordinatesArray: ', coordinatesArray)
 
   const handleClose = () => {
     setOpen(false)
@@ -94,7 +114,6 @@ export const DroppedPin = ({
   }
 
   return (
-      // {coordinatesArray && 
     <div>
       <AdvancedMarker position={coordinatesArray} onClick={() => setOpen(true)}>
         <Pin background={color()} glyphColor={color()} borderColor={'black'} />
@@ -108,7 +127,7 @@ export const DroppedPin = ({
         >
           <h2 className="font-bold">{users}</h2>
           <p>{description ?? ''}</p>
-          <p className='text-tiny text-gray-500'>{time()}</p>
+          <p className="text-tiny text-gray-500">{time()}</p>
           {routeBtn ? (
             <Button
               onPress={() => controlRouteBtn()}
@@ -193,9 +212,9 @@ export const DroppedPin = ({
           >
             Open in Google Maps
           </Button>
-          <DeleteButton pinId={id} setOpen={setOpen}/>
+          <DeleteButton pinId={id} setOpen={setOpen} />
         </InfoWindow>
       )}
     </div>
   )
-    }
+}
