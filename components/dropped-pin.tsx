@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '@nextui-org/button'
 
 import { DeleteButton } from './delete-btn'
+import { User } from '@/utils/get-user'
 
 export const DroppedPin = ({
   getDirections,
@@ -31,6 +32,12 @@ export const DroppedPin = ({
     lat: number
     lng: number
   } | null>(null)
+  const [currentUser, setCurrentUser] = useState<TUser | null>(null)
+
+  type TUser = {
+    id: string
+    email?: string | undefined
+  }
 
   const parseCoordinates = (
     coordinates: string
@@ -102,6 +109,22 @@ export const DroppedPin = ({
     const date = new Date(created_at)
     return date.toLocaleString()
   }
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await User()
+      setCurrentUser(user)
+    }
+    fetchUser()
+  }, [])
+  
+  console.log('current user: ', currentUser?.id)
+  console.log('pin id: ', pin.user_id)
+
+  const userIsOwner = currentUser?.id === id
+  const userIsAdmin = currentUser?.email === 'blombergalexandras@gmail.com' || currentUser?.email === 'styrelse@skydive.se'
+
+  console.log('owner: ', userIsOwner, 'admin: ', userIsAdmin)
 
   return (
     <div>

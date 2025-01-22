@@ -19,8 +19,9 @@ export const deletePin = async (pinId: string) => {
     data: { user },
   } = await supabase.auth.getUser()
   const isPinCreator = user && user.id === pin?.user_id
+  const isAdmin = user && user.email === 'blombergalexandras@gmail.com' || user && user.email === 'styrelse@skydive.se'
 
-  if (!isPinCreator) {
+  if (!isPinCreator && !isAdmin) {
     return {error: 'You are not allowed to delete this pin'}
   }
 

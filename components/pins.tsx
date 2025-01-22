@@ -22,8 +22,6 @@ export default function Pins({
     fetchData()
   }, [])
 
-  console.log('Data mapped to create DroppedPin:' ,data)
-
   return (
     <>
       {data &&
@@ -37,6 +35,7 @@ export default function Pins({
             id={pin.id}
             injured={pin.injured}
             users={pin.users?.username}
+            user_id={pin.user_id} // I have pin.description why not pin.user_id when it's in the table????
           />
         ))}
       {error && (

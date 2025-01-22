@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { UserCircleIcon as SolidUserCircleIcon } from '@heroicons/react/16/solid'
-
 import { createClient } from '@/utils/supabase/server'
+
 import { LogOutButton } from './logout-button'
 import { CreateButton } from './create-button'
 
