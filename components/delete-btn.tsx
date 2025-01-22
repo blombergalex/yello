@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { deletePin } from '@/actions/delete-pin'
 import { handleRedirect } from '@/utils/handle-redirect'
 import { handleServerError } from '@/utils/action-utils'
+import { Button } from '@nextui-org/react'
 
 export const DeleteButton = ({
   pinId,
@@ -32,8 +33,6 @@ export const DeleteButton = ({
   })
 
   return (
-      <a onClick={() => mutate()}>
-        Got picked up? <span className='underline underline-offset-2'>Delete pin</span>
-      </a>
+        <Button onPress={() => mutate()} className='bg-green-900 text-white text-tiny'>Delete pin</Button>
   )
 }
