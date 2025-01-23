@@ -1,6 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import { toast } from 'sonner'
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -37,6 +36,7 @@ export async function updateSession(request: NextRequest) {
   if (!user && request.nextUrl.pathname.startsWith('/create')) {
     const url = request.nextUrl.clone()
     url.pathname = '/log-in'
+    url.searchParams.set('error', 'login')
     return NextResponse.redirect(url)
   }
 

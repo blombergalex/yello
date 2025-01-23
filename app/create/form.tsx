@@ -58,8 +58,6 @@ export const CreateForm = () => {
         console.error(
           'Error getting coordinates. Geolocation is not supported by browser'
         )
-
-        
       }
     }
     getLocation()

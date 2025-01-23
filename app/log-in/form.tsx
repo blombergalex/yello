@@ -2,8 +2,10 @@
 
 import { Button, Input } from "@nextui-org/react"
 import { toast } from 'sonner'
-import { useMutation } from "@tanstack/react-query"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { useMutation } from "@tanstack/react-query"
+import { useSearchParams } from "next/navigation"
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -14,6 +16,16 @@ import { logIn } from "@/actions/log-in";
 import { handleRedirect } from "@/utils/handle-redirect"
 
 export const LogInForm = () => {
+
+  const searchParams = useSearchParams()
+  const error = searchParams.get('error')
+
+  useEffect(() => {
+    if (error === 'login') {
+      toast.error('Log in to drop a pin')
+    }
+  }, [error])
+
   const { mutate, isPending } = useMutation({
     mutationFn: async (variables:z.infer<typeof logInSchema>) => {
       handleServerError(await logIn(variables))

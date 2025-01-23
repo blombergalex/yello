@@ -4,6 +4,8 @@ import { LogInForm } from './form'
 import { Logo } from '@/components/logo'
 
 export default function LogInPage() {
+
+
   return (
     <main className='main flex h-screen flex-col items-center justify-center gap-6'>
       <Logo />
