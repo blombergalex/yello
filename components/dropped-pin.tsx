@@ -25,7 +25,7 @@ export const DroppedPin = ({
   id: string
   injured: boolean | null
   username: string | undefined
-  user_id: string
+  user_id: string | null
 }) => {
   const [open, setOpen] = useState<boolean>(false)
   const [showCoords, setShowCoords] = useState<boolean>(false)
