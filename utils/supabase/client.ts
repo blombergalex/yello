@@ -1,5 +1,3 @@
-// fetch wrapper instead of writing url points for every database call
-
 import { createBrowserClient } from '@supabase/ssr'
 
 import { type Database } from './database.types'

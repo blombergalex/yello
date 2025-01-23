@@ -14,7 +14,7 @@ export const deletePin = async (pinId: string) => {
   if (pinError || !pin) {
    return { error: 'Could not get pin'}
   }
-
+  
   const {
     data: { user },
   } = await supabase.auth.getUser()

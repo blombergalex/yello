@@ -80,7 +80,6 @@ export const SignUpForm = () => {
           className={buttonClasses}
           type="submit"
           size="sm"
-          // onPress={() => handleRedirect('/log-in')}
           disabled={isPending}
         >
           {isPending ? 'Creating...' : 'Sign up'}
