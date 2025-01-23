@@ -11,6 +11,10 @@ export const createPin = async (
 ): Promise<ServerActionResult> => {
   const parsedData = pinSchema.parse(data)
 
+  if (!parsedData.coordinates) {
+    return { error: 'Position is required to drop a pin' };
+  }
+
   const supabase = await createClient()
 
   const {

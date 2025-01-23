@@ -13,6 +13,6 @@ export const logInSchema = z.object({
 
 export const pinSchema = z.object({
   description: z.string().optional(),
-  coordinates: z.string(),
+  coordinates: z.string().min(1, "Position not found. Please enable location permissions in your device settings."),
   injured: z.string(),
 });

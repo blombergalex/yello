@@ -15,9 +15,9 @@ export default function LogInPage() {
         <Link href='/sign-up' className='text-yellow-500 text-small hover:underline underline-offset-2'>
           Don&quot;t have an account? Sign up
         </Link>
-        <p className='text-gray-500'>or</p>
+        <p className='text-gray-400 text-small'>or</p>
         <Link href='/' className='text-yellow-500 text-small hover:underline underline-offset-2'>
-          View map without account
+          View without account
         </Link>
       </div>
     </main>

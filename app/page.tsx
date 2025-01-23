@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <section className="relative flex flex-col h-screen">
       <Header />
-      <div className="flex h-2/3 border-4 rounded-lg border-yellow-500 m-2">
+      <div className="flex h-2/3 border-4 rounded-lg border-yellow-400 m-2">
         <YelloMap />
       </div>
       {error || data.length === 0 ? (

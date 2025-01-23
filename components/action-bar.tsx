@@ -33,8 +33,7 @@ export const ActionBar = async () => {
   return (
     <section>
       {user ? (
-        <div className="grid grid-cols-3 items-end bg-yellow-500 w-screen p-2">
-
+        <div className="grid grid-cols-3 items-end bg-yellow-400 w-screen p-2">
           <div className="flex flex-col items-start">
             <div className='flex flex-col items-center'>
 
@@ -56,7 +55,7 @@ export const ActionBar = async () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-3 items-center bg-yellow-500 w-screen px-2">
+        <div className="grid grid-cols-3 items-center bg-yellow-400 w-screen px-2">
         <Link href='/log-in' className="flex flex-col justify-start">
           <h3 className="text-small uppercase font-semibold text-white w-fit items-center">
             Log in

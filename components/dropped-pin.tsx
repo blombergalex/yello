@@ -140,7 +140,7 @@ export const DroppedPin = ({
         >
           <h2 className="font-bold">{username}</h2>
           <p>{description ?? ''}</p>
-          <p className="text-tiny text-gray-500">{time()}</p>
+          <p className="text-tiny text-gray-400">{time()}</p>
           {routeBtn ? (
             <Button
               onPress={() => controlRouteBtn()}

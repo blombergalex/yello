@@ -22,7 +22,6 @@ export const CreateForm = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (variables: z.infer<typeof pinSchema>) => {
       handleServerError(await createPin(variables))
-      console.log(variables)
     },
     onError: (error) => toast.error(error.message),
     onSuccess: () => {
@@ -55,11 +54,12 @@ export const CreateForm = () => {
             setCoordinates(coordinates)
           }
         )
-        console.log('location rendered: ', coordinates)
       } else {
         console.error(
           'Error getting coordinates. Geolocation is not supported by browser'
         )
+
+        
       }
     }
     getLocation()
@@ -68,7 +68,7 @@ export const CreateForm = () => {
   return (
     <form
       onSubmit={handleSubmit((values) => mutate(values))}
-      className="flex items-center w-screen flex-col gap-4 p-10 w-2/3"
+      className="flex items-center w-screen flex-col gap-4 p-10 mx-auto md:w-1/2"
     >
       <p>
         <span className="text-gray-400">Position</span> {coordinates}
@@ -79,11 +79,11 @@ export const CreateForm = () => {
         value={`${coordinates}`}
       />
       {errors.coordinates && (
-        <span className={errorClasses}>{errors.coordinates.message}</span>
+        <span className={`${errorClasses} text-yellow-500`}>{errors.coordinates.message}</span>
       )}
       <Textarea
         {...register('description')}
-        label="Names of others with you, phone number, surroundings..."
+        label="People with you, phone number, surroundings..."
       />
       {errors.description && (
         <span className={errorClasses}>{errors.description.message}</span>

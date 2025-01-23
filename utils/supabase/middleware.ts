@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { toast } from 'sonner'
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -34,7 +35,6 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   if (!user && request.nextUrl.pathname.startsWith('/create')) {
-    console.log('No user')
     const url = request.nextUrl.clone()
     url.pathname = '/log-in'
     return NextResponse.redirect(url)

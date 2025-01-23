@@ -31,7 +31,7 @@ export const Header = () => {
       animate={hidden ? 'hidden' : 'visible'}
       transition={{ duraction: 0.35, ease: 'easeInOut' }}
     >
-      <div className="p-2 sticky top-0 flex w-full z-10 bg-yellow-500">
+      <div className="p-2 sticky top-0 flex w-full z-10 bg-yellow-400">
         <h1 className={`${moiraiOne.className} text-white text-6xl font-bold`}>
           Yello
         </h1>

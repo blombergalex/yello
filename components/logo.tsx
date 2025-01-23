@@ -9,7 +9,7 @@ const moiraiOne = Moirai_One({
 export const Logo = () => {
   return (
     <Link
-      className={`${moiraiOne.className} text-6xl font-bold self-start absolute top-2 left-2 text-yellow-500`}
+      className={`${moiraiOne.className} text-6xl font-bold self-start absolute top-2 left-2 text-yellow-400`}
       href="/"
     >
       Yello
