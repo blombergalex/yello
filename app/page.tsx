@@ -7,9 +7,9 @@ export default async function Home() {
   const { data, error } = await getPins()
 
   return (
-    <section className="relative flex flex-col h-screen">
+    <section className="relative flex flex-col h-dvh">
       <Header />
-      <div className="flex h-2/3 border-4 rounded-lg border-yellow-400 m-2">
+      <div className="flex h-full border-4 rounded-lg border-yellow-400 m-2">
         <YelloMap />
       </div>
       {error || data.length === 0 ? (
